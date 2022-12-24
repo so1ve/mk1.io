@@ -8,7 +8,7 @@ import Button from "./components/Button.vue";
       👋 Hi! I'm Ray (<a href="https://github.com/so1ve" target="_blank">@so1ve</a>)
     </h1>
     <section class="grid mx-auto w-50% md:flex justify-center grid-cols-[1fr_1fr] gap-3">
-      <Button href="https://mk1.io">
+      <Button href="https://blog.mk1.io">
         <span class="i-ri:draft-line" />
         Blog
       </Button>
@@ -16,11 +16,11 @@ import Button from "./components/Button.vue";
         <span class="i-ri:github-line" />
         GitHub
       </Button>
-      <Button href="https://mk1.io/pages/projects">
+      <Button href="https://blog.mk1.io/pages/projects">
         <span class="i-ri:flask-line" />
         Projects
       </Button>
-      <Button href="https://mk1.io/pages/friends">
+      <Button href="https://blog.mk1.io/pages/friends">
         <span class="i-ri:link" />
         Friends
       </Button>
