@@ -32,6 +32,10 @@ jobs:
       - name: Build
         run: nr build-only
 
+      - name: Remove node_modules
+        run: rm -rf node_modules
+      
+
       - name: Deploy to Deno Deploy
         uses: denoland/deployctl@v1
         with:
