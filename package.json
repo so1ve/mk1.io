@@ -5,7 +5,9 @@
     "build": "nuxt generate",
     "dev": "nuxt dev",
     "postinstall": "nuxt prepare",
-    "typecheck": "nuxt typecheck"
+    "typecheck": "nuxt typecheck",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "devDependencies": {
     "@iconify-json/ri": "^1.1.4",
