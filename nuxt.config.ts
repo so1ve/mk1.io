@@ -14,6 +14,16 @@ export default defineNuxtConfig({
       "Fira+Mono": [400, 700],
     },
   },
+  app: {
+    head: {
+      link: [
+        {
+          rel: "icon",
+          href: "/favicon.png",
+        },
+      ],
+    },
+  },
   experimental: {
     noScripts: true,
     payloadExtraction: false,
