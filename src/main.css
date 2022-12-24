@@ -1,0 +1,19 @@
+body {
+  @apply flex place-items-center min-h-screen min-w-screen text-4 leading-24px font-medium font-synthesis-none select-none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+#app {
+  @apply text-center mx-auto font-medium p-2 md:min-h-initial min-h-70vh;
+}
+
+a {
+  @apply color-#3498db decoration-inherit transition;
+}
+
+a:hover {
+  @apply color-#2980b9;
+}
