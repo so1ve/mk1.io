@@ -30,6 +30,10 @@ import "./main.css";
     <p class="inline-flex justify-center items-center gap-1">
       2020-PRESENT <span class="i-ri:copyright-line" /> Ray
     </p>
+    <br>
+    <p class="inline-flex justify-center items-center gap-1">
+      Author: <a href="https://github.com/akarachen" target="_blank">@AkaraChen</a>
+    </p>
   </footer>
 </template>
 
