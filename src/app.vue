@@ -5,7 +5,7 @@ import "./main.css";
 <template>
   <main>
     <h1 class="md:text-3.5em text-2.5em leading-[1.1] mt-0 mb-8">
-      👋 Hi! I'm Ray (<a href="https://github.com/so1ve" target="_blank">@so1ve</a>)
+      <span class="hand inline-block">👋</span> Hi! I'm Ray (<a href="https://github.com/so1ve" target="_blank">@so1ve</a>)
     </h1>
     <section class="grid mx-auto w-50% md:flex justify-center grid-cols-[1fr_1fr] gap-3">
       <Button href="https://blog.mk1.io">
@@ -32,3 +32,26 @@ import "./main.css";
     </p>
   </footer>
 </template>
+
+<style scoped>
+@keyframes shake-hand {
+  10% {
+    transform: rotate(20deg);
+  }
+  20% {
+    transform: rotate(-10deg);
+  }
+  30% {
+    transform: rotate(20deg);
+  }
+  40% {
+    transform: rotate(-10deg);
+  }
+  50%, 100% {
+    transform: rotate(0deg);
+  }
+}
+.hand {
+  animation: shake-hand 2.5s .15s linear infinite;
+}
+</style>
