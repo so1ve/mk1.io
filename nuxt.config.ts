@@ -16,6 +16,7 @@ export default defineNuxtConfig({
   },
   app: {
     head: {
+      title: "Ray's Homepage",
       link: [
         {
           rel: "icon",
