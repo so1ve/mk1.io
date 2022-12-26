@@ -20,6 +20,10 @@ import "./main.css";
         <span class="i-ri:flask-line" />
         Projects
       </Button>
+      <Button href="https://blog.mk1.io/pages/donate">
+        <span class="i-ri:money-cny-circle-line" />
+        Donate
+      </Button>
       <Button href="https://blog.mk1.io/pages/friends">
         <span class="i-ri:link" />
         Friends
