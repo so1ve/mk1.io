@@ -3,7 +3,7 @@ export default defineNuxtConfig({
   modules: [
     "@unocss/nuxt",
     "@nuxtjs/google-fonts",
-    '@kevinmarrec/nuxt-pwa'
+    "@kevinmarrec/nuxt-pwa",
   ],
   unocss: {
     preflight: true,
@@ -18,7 +18,7 @@ export default defineNuxtConfig({
   pwa: {
     icon: {
       fileName: "favicon.png",
-    }
+    },
   },
   app: {
     head: {
@@ -56,7 +56,7 @@ export default defineNuxtConfig({
         { hid: "twitter:image", name: "twitter:image", content: "/favicon.png" },
         { hid: "twitter:site", name: "twitter:site", content: "https://mk1.io" },
         { hid: "twitter:creator", name: "twitter:creator", content: "@so1v3" },
-      ]
+      ],
     },
   },
   experimental: {
