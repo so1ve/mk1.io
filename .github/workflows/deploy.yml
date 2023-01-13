@@ -41,3 +41,44 @@ jobs:
           project: rfe
           entrypoint: server/index.ts
           root: .output
+
+  deploy-static:
+    runs-on: ubuntu-latest
+
+    env:
+      NITRO_PRESET: deno
+
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v3
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2.2.1
+
+      - name: Setup node
+        uses: actions/setup-node@8c91899e586c5b171469028077307d293428b516 # v3
+        with:
+          node-version: 16.x
+          cache: pnpm
+
+      - name: Setup
+        run: npm i -g @antfu/ni
+
+      - name: Install
+        run: nci
+
+      - name: Generate
+        run: nr generate
+
+      - name: Cleanup
+        run: rm -rf node_modules
+
+      - name: Deploy to Deno Deploy
+        uses: denoland/deployctl@v1
+        with:
+          project: rfe-static
+          entrypoint: serve.ts
