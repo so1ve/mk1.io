@@ -5,7 +5,7 @@ import "./main.css";
 <template>
   <main>
     <h1 class="leading-[1.1] mb-8 md:text-3.5em mt-0 text-2.5em">
-      <span class="hand inline-block">👋</span> Hi! I'm Ray (<a href="https://github.com/so1ve" target="_blank">@so1ve</a>)
+      <span class="hand inline-block">👋</span> Hi! I'm Ray (<a href="https://github.com/so1ve" rel="noopener noreferrer" target="_blank">@so1ve</a>)
     </h1>
     <section class="gap-3 grid grid-cols-[1fr_1fr] justify-center md:flex mx-auto w-50%">
       <Button href="https://blog.mk1.io">
@@ -36,7 +36,7 @@ import "./main.css";
     </p>
     <br>
     <p class="gap-1 inline-flex items-center justify-center">
-      Author: <a href="https://github.com/akarachen" target="_blank">@AkaraChen</a>
+      Author: <a href="https://github.com/akarachen" rel="noopener noreferrer" target="_blank">@AkaraChen</a>
     </p>
   </footer>
 </template>
