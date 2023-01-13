@@ -4,10 +4,10 @@ import "./main.css";
 
 <template>
   <main>
-    <h1 class="md:text-3.5em text-2.5em leading-[1.1] mt-0 mb-8">
+    <h1 class="leading-[1.1] mb-8 md:text-3.5em mt-0 text-2.5em">
       <span class="hand inline-block">👋</span> Hi! I'm Ray (<a href="https://github.com/so1ve" target="_blank">@so1ve</a>)
     </h1>
-    <section class="grid mx-auto w-50% md:flex justify-center grid-cols-[1fr_1fr] gap-3">
+    <section class="gap-3 grid grid-cols-[1fr_1fr] justify-center md:flex mx-auto w-50%">
       <Button href="https://blog.mk1.io">
         <span class="i-ri:draft-line" />
         Blog
@@ -31,11 +31,11 @@ import "./main.css";
     </section>
   </main>
   <footer class="mt-8 opacity-80">
-    <p class="inline-flex justify-center items-center gap-1">
+    <p class="gap-1 inline-flex items-center justify-center">
       2020-PRESENT <span class="i-ri:copyright-line" /> Ray
     </p>
     <br>
-    <p class="inline-flex justify-center items-center gap-1">
+    <p class="gap-1 inline-flex items-center justify-center">
       Author: <a href="https://github.com/akarachen" target="_blank">@AkaraChen</a>
     </p>
   </footer>

@@ -1,5 +1,5 @@
 <template>
-  <a class="rounded-2 bg-#f9f9f9 py-0.6em px-1.2em inline-block border-transparent border-solid border-1px text-1em transition-duration-0.25s inline-flex gap-1 items-center justify-center" target="_blank">
+  <a class="bg-#f9f9f9 border-1px border-solid border-transparent gap-1 inline-block inline-flex items-center justify-center px-1.2em py-0.6em rounded-2 text-1em transition-duration-0.25s" target="_blank">
     <slot />
   </a>
 </template>
