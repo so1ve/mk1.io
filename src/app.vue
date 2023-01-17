@@ -28,6 +28,10 @@ import "./main.css";
         <span class="i-ri:link" />
         Friends
       </Button>
+      <Button href="https://blog.mk1.io/pages/about">
+        <span class="i-ri:account-circle-fill" />
+        About
+      </Button>
     </section>
   </main>
   <footer class="mt-8 opacity-80">
