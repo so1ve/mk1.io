@@ -8,7 +8,7 @@ body {
 }
 
 #__nuxt {
-  @apply text-center mx-auto font-medium p-2 md:min-h-initial min-h-70vh;
+  @apply text-center mx-auto font-medium p-2 md:min-h-auto min-h-70vh;
 }
 
 a {
