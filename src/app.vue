@@ -1,4 +1,4 @@
-<script>
+<script setup lang="ts">
 import "./main.css";
 </script>
 
@@ -8,30 +8,24 @@ import "./main.css";
       <span class="hand inline-block">👋</span> Hi! I'm Ray (<a href="https://github.com/so1ve" rel="noopener noreferrer" target="_blank">@so1ve</a>)
     </h1>
     <section class="gap-3 grid grid-cols-[1fr_1fr] justify-center md:flex mx-auto w-50%">
-      <Button href="https://blog.mk1.io">
-        <span class="i-ri:draft-line" />
+      <Item icon="i-ri:draft-line" link="https://blog.mk1.io">
         Blog
-      </Button>
-      <Button href="https://github.com/so1ve">
-        <span class="i-ri:github-line" />
+      </Item>
+      <Item icon="i-ri:github-line" link="https://github.com/so1ve">
         GitHub
-      </Button>
-      <Button href="https://blog.mk1.io/pages/projects">
-        <span class="i-ri:flask-line" />
+      </Item>
+      <Item icon="i-ri:flask-line" link="https://blog.mk1.io/pages/projects">
         Projects
-      </Button>
-      <Button href="https://blog.mk1.io/pages/donate">
-        <span class="i-ri:money-cny-circle-line" />
+      </Item>
+      <Item icon="i-ri:money-cny-circle-line" link="https://blog.mk1.io/pages/donate">
         Donate
-      </Button>
-      <Button href="https://blog.mk1.io/pages/friends">
-        <span class="i-ri:link" />
+      </Item>
+      <Item icon="i-ri:link" link="https://blog.mk1.io/pages/friends">
         Friends
-      </Button>
-      <Button href="https://blog.mk1.io/pages/about">
-        <span class="i-ri:account-circle-fill" />
+      </Item>
+      <Item icon="i-ri:account-circle-fill" link="https://blog.mk1.io/pages/about">
         About
-      </Button>
+      </Item>
     </section>
   </main>
   <footer class="mt-8 opacity-80">
