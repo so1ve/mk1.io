@@ -1,11 +1,10 @@
-// @ts-expect-error Deno
+// @ts-nocheck
 import { serve } from "https://deno.land/std@0.170.0/http/server.ts";
-// @ts-expect-error Deno
 import { serveDir } from "https://deno.land/std@0.170.0/http/file_server.ts";
 
 serve((req) => {
   // Redirect /.well-known/webfinger to mas.mk1.io
-  if (req.url.endsWith("/.well-known/webfinger")) {
+  if (req.url.includes("/.well-known/webfinger")) {
     return new Response(null, {
       status: 301,
       headers: {
