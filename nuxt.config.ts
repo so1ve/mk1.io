@@ -69,6 +69,17 @@ export default defineNuxtConfig({
       ],
     },
   },
+  routeRules: {
+    "/.well-known/webfinger": {
+      redirect: {
+        to: "https://mas.mk1.io/.well-known/webfinger",
+        statusCode: 301,
+      },
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+    },
+  },
   experimental: {
     noScripts: true,
     payloadExtraction: false,
