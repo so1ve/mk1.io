@@ -3,7 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@iconify-json/ri': ^1.1.4
   '@kevinmarrec/nuxt-pwa': ^0.15.0
-  '@nuxtjs/google-fonts': 3.0.0-1
+  '@nuxtjs/google-fonts': 3.0.0
   '@so1ve/eslint-config': ^0.42.2
   '@unocss/nuxt': ^0.49.0
   '@unocss/reset': ^0.49.0
@@ -14,7 +14,7 @@ specifiers:
 devDependencies:
   '@iconify-json/ri': 1.1.5
   '@kevinmarrec/nuxt-pwa': 0.15.0
-  '@nuxtjs/google-fonts': 3.0.0-1
+  '@nuxtjs/google-fonts': 3.0.0
   '@so1ve/eslint-config': 0.42.2_vgl77cfdswitgr47lm5swmv43m
   '@unocss/nuxt': 0.49.8
   '@unocss/reset': 0.49.8
@@ -1518,12 +1518,12 @@ packages:
       - vue-tsc
     dev: true
 
-  /@nuxtjs/google-fonts/3.0.0-1:
-    resolution: {integrity: sha512-eSFvAAMU1e2lxHn6Os41vVz8ngyPURAiYjpVMpmIv5ZqvQ3kn+YfPAglXQ0PfOVKunbLdj1prcnv+Pk5jG0Sbg==}
+  /@nuxtjs/google-fonts/3.0.0:
+    resolution: {integrity: sha512-knP2CJFkMHGQ9pepVNwquXvqiIHDma/6yZNXiYk7WWatRbbQUPf2423vXiBYu267Mff2KMuDLoAJ1Dsv2ymhdQ==}
     dependencies:
       '@nuxt/kit': 3.2.3
       google-fonts-helper: 3.2.4
-      pathe: 0.3.9
+      pathe: 1.1.0
     transitivePeerDependencies:
       - rollup
       - supports-color
@@ -5941,10 +5941,6 @@ packages:
   /path-type/4.0.0:
     resolution: {integrity: sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==}
     engines: {node: '>=8'}
-    dev: true
-
-  /pathe/0.3.9:
-    resolution: {integrity: sha512-6Y6s0vT112P3jD8dGfuS6r+lpa0qqNrLyHPOwvXMnyNTQaYiwgau2DP3aNDsR13xqtGj7rrPo+jFUATpU6/s+g==}
     dev: true
 
   /pathe/1.1.0:
