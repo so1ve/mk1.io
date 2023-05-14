@@ -1,10 +1,6 @@
 export default defineNuxtConfig({
   srcDir: "./src",
-  modules: [
-    "@unocss/nuxt",
-    "@nuxtjs/google-fonts",
-    "@kevinmarrec/nuxt-pwa",
-  ],
+  modules: ["@unocss/nuxt", "@nuxtjs/google-fonts", "@kevinmarrec/nuxt-pwa"],
   unocss: {
     preflight: true,
   },
@@ -61,10 +57,26 @@ export default defineNuxtConfig({
         { hid: "og:type", property: "og:type", content: "website" },
         { hid: "og:locale", property: "og:locale", content: "en_US" },
         { hid: "twitter:card", name: "twitter:card", content: "summary" },
-        { hid: "twitter:title", name: "twitter:title", content: "Ray's Homepage" },
-        { hid: "twitter:description", name: "twitter:description", content: "Ray's Homepage" },
-        { hid: "twitter:image", name: "twitter:image", content: "/favicon.png" },
-        { hid: "twitter:site", name: "twitter:site", content: "https://mk1.io" },
+        {
+          hid: "twitter:title",
+          name: "twitter:title",
+          content: "Ray's Homepage",
+        },
+        {
+          hid: "twitter:description",
+          name: "twitter:description",
+          content: "Ray's Homepage",
+        },
+        {
+          hid: "twitter:image",
+          name: "twitter:image",
+          content: "/favicon.png",
+        },
+        {
+          hid: "twitter:site",
+          name: "twitter:site",
+          content: "https://mk1.io",
+        },
         { hid: "twitter:creator", name: "twitter:creator", content: "@so1v3" },
       ],
     },
