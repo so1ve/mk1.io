@@ -3,7 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@iconify-json/ri': ^1.1.4
   '@kevinmarrec/nuxt-pwa': ^0.17.0
-  '@nuxtjs/google-fonts': 3.0.0
+  '@nuxtjs/google-fonts': 3.0.1
   '@so1ve/eslint-config': ^0.87.0
   '@unocss/nuxt': ^0.51.0
   '@unocss/reset': ^0.51.0
@@ -14,7 +14,7 @@ specifiers:
 devDependencies:
   '@iconify-json/ri': 1.1.8
   '@kevinmarrec/nuxt-pwa': 0.17.0
-  '@nuxtjs/google-fonts': 3.0.0
+  '@nuxtjs/google-fonts': 3.0.1
   '@so1ve/eslint-config': 0.87.0_3qfatcekpgbllh6uk5ivyhkbxq
   '@unocss/nuxt': 0.51.12
   '@unocss/reset': 0.51.12
@@ -944,10 +944,10 @@ packages:
       - vue-tsc
     dev: true
 
-  /@nuxtjs/google-fonts/3.0.0:
-    resolution: {integrity: sha512-knP2CJFkMHGQ9pepVNwquXvqiIHDma/6yZNXiYk7WWatRbbQUPf2423vXiBYu267Mff2KMuDLoAJ1Dsv2ymhdQ==}
+  /@nuxtjs/google-fonts/3.0.1:
+    resolution: {integrity: sha512-9W5jZhpJ4UTmiPebljdoxs+ju89rOBVD5gb0sPRe73BVXCUUv46lV2Q0ynPZPsnono5WlTB6nyZbOCECa7IWDQ==}
     dependencies:
-      '@nuxt/kit': 3.4.3
+      '@nuxt/kit': 3.5.0
       google-fonts-helper: 3.3.0
       pathe: 1.1.0
     transitivePeerDependencies:

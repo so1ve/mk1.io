@@ -13,7 +13,7 @@
   "devDependencies": {
     "@iconify-json/ri": "^1.1.4",
     "@kevinmarrec/nuxt-pwa": "^0.17.0",
-    "@nuxtjs/google-fonts": "3.0.0",
+    "@nuxtjs/google-fonts": "3.0.1",
     "@so1ve/eslint-config": "^0.87.0",
     "@unocss/nuxt": "^0.51.0",
     "@unocss/reset": "^0.51.0",
