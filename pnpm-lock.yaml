@@ -6,7 +6,7 @@ specifiers:
   '@nuxtjs/google-fonts': 3.0.1
   '@so1ve/eslint-config': ^0.87.0
   '@unocss/nuxt': ^0.51.0
-  '@unocss/reset': ^0.51.0
+  '@unocss/reset': ^0.52.0
   eslint: ^8.32.0
   nuxt: 3.5.0
   typescript: ^5.0.0
@@ -17,7 +17,7 @@ devDependencies:
   '@nuxtjs/google-fonts': 3.0.1
   '@so1ve/eslint-config': 0.87.0_3qfatcekpgbllh6uk5ivyhkbxq
   '@unocss/nuxt': 0.51.12
-  '@unocss/reset': 0.51.12
+  '@unocss/reset': 0.52.0
   eslint: 8.40.0
   nuxt: 3.5.0_3qfatcekpgbllh6uk5ivyhkbxq
   typescript: 5.0.4
@@ -1781,6 +1781,10 @@ packages:
 
   /@unocss/reset/0.51.12:
     resolution: {integrity: sha512-VWcudNyGPGU/C+Jrfzbx8BqhFh/QENfUPkKcC8hpqxC4b5PsTJcF8zLu6KgabM0X0CzVouIvVcdZIcUCUEH77Q==}
+    dev: true
+
+  /@unocss/reset/0.52.0:
+    resolution: {integrity: sha512-hRdgzpxWkDriRneLCv8cRNWBVNJ9FQVLY6jLk7C3MMaab0FH9JufdNwRw/yiqtEEhnnT2GF8IfN3HY69T01tNw==}
     dev: true
 
   /@unocss/scope/0.51.12:
