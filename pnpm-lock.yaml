@@ -2936,8 +2936,8 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /devalue/4.3.1:
-    resolution: {integrity: sha512-Kc0TSP9IUU9eg55au5Q3YtqaYI2cgntVpunJV9Exbm9nvlBeTE5p2NqYHfpuXK6+VF2hF5PI+BPFPUti7e2N1g==}
+  /devalue/4.3.2:
+    resolution: {integrity: sha512-KqFl6pOgOW+Y6wJgu80rHpo2/3H07vr8ntR9rkkFIRETewbf5GaYYcakYfiKz89K+sLsuPkQIZaXDMjUObZwWg==}
     dev: true
 
   /diff/5.1.0:
@@ -5642,8 +5642,8 @@ packages:
     resolution: {integrity: sha512-+M0PwXeU80kRohZ3aT4J/OnR+l9/KD2nVLNNoRgFtnf+umQVFdGBAO2N8+nCnEi0xlh/Wk3zOGC+vNNx+uM79Q==}
     dev: true
 
-  /node-sql-parser/4.6.6:
-    resolution: {integrity: sha512-zpash5xnRY6+0C9HFru32iRJV1LTkwtrVpO90i385tYVF6efyXK/B3Nsq/15Fuv2utxrqHNjKtL55OHb8sl+eQ==}
+  /node-sql-parser/4.7.0:
+    resolution: {integrity: sha512-6pKgpQ15gwzDdIZVSDYH/5rVOOEWXzIrVOcq7FLCtoo+AVXTFIDmJjgRZOhTW+mDjj9trSHELXv+2AOK4C2dlQ==}
     engines: {node: '>=8'}
     dependencies:
       big-integer: 1.6.51
@@ -5738,7 +5738,7 @@ packages:
       cookie-es: 1.0.0
       defu: 6.1.2
       destr: 1.2.2
-      devalue: 4.3.1
+      devalue: 4.3.2
       escape-string-regexp: 5.0.0
       estree-walker: 3.0.3
       fs-extra: 11.1.1
@@ -6518,7 +6518,7 @@ packages:
     peerDependencies:
       prettier: ^2.0.0
     dependencies:
-      node-sql-parser: 4.6.6
+      node-sql-parser: 4.7.0
       sql-formatter: 12.2.1
       tslib: 2.5.2
     dev: true
