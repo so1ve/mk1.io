@@ -21,8 +21,8 @@ devDependencies:
     specifier: ^0.52.0
     version: 0.52.0(postcss@8.4.24)
   '@unocss/reset':
-    specifier: ^0.52.0
-    version: 0.52.0
+    specifier: ^0.53.0
+    version: 0.53.0
   eslint:
     specifier: ^8.32.0
     version: 8.32.0
@@ -1671,6 +1671,10 @@ packages:
 
   /@unocss/reset@0.52.0:
     resolution: {integrity: sha512-hRdgzpxWkDriRneLCv8cRNWBVNJ9FQVLY6jLk7C3MMaab0FH9JufdNwRw/yiqtEEhnnT2GF8IfN3HY69T01tNw==}
+    dev: true
+
+  /@unocss/reset@0.53.0:
+    resolution: {integrity: sha512-4XJkEtVxUGYp+WX2aRTrZLNp6MEwulBvhhpkAjwfkS+wVdo9lMma0O93TCqJaFeYx7lU8W92APB4n918rz9scA==}
     dev: true
 
   /@unocss/scope@0.52.0:
