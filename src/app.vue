@@ -36,7 +36,7 @@ import "./main.css";
         Friends
       </Item>
       <Item icon="i-ri:message-2-line" link="https://qm.qq.com/cgi-bin/qm/qr?k=-j0kEWcr-yAFpcg79wS-SrtW50XdAoaQ&jump_from=webapi&authKey=h0W2EehoQRQ4+MPNkcu7S5gMxulHb4Fzd0KflY4aOFMyFUvF3kI8Bltz8sKqU1ik">
-        QQ Group
+        QQ
       </Item>
       <Item
         icon="i-ri:account-circle-fill"
