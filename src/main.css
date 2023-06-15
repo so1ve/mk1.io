@@ -1,5 +1,6 @@
 body {
-  font-family: "Fira Code", "Fira Mono", Inter, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-family: "Fira Code", "Fira Mono", Inter, ui-monospace, SFMono-Regular,
+    Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   @apply flex place-items-center min-h-screen min-w-screen text-4 leading-24px font-medium font-synthesis-none select-none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
