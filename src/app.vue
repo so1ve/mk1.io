@@ -4,7 +4,7 @@ import "./main.css";
 
 <template>
   <main>
-    <h1 class="leading-[1.1] mb-8 md:text-3.5em mt-0 text-2.5em">
+    <h1 class="mb-8 mt-0 text-2.5em leading-[1.1] md:text-3.5em">
       <span class="hand inline-block">👋</span>
       Hi! I'm Ray (
       <a
@@ -17,7 +17,7 @@ import "./main.css";
       )
     </h1>
     <section
-      class="gap-3 grid grid-cols-[1fr_1fr] justify-center md:flex mx-auto w-50%"
+      class="grid grid-cols-[1fr_1fr] mx-auto w-50% justify-center gap-3 md:flex"
     >
       <Item icon="i-ri:draft-line" link="https://blog.mk1.io">Blog</Item>
       <Item icon="i-ri:github-line" link="https://github.com/so1ve">
@@ -50,13 +50,13 @@ import "./main.css";
     </section>
   </main>
   <footer class="mt-8 opacity-80">
-    <p class="gap-1 inline-flex items-center justify-center">
+    <p class="inline-flex items-center justify-center gap-1">
       2020-PRESENT
       <span class="i-ri:copyright-line" />
       Ray
     </p>
     <br />
-    <p class="gap-1 inline-flex items-center justify-center">
+    <p class="inline-flex items-center justify-center gap-1">
       Author:
       <a
         href="https://github.com/akarachen"
