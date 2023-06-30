@@ -5,16 +5,16 @@
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate && esbuild --minify .output/public/sw.js --outfile=.output/public/sw.js --allow-overwrite",
+    "postinstall": "nuxt prepare",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "postinstall": "nuxt prepare",
     "typecheck": "nuxt typecheck"
   },
   "devDependencies": {
     "@iconify-json/ri": "^1.1.9",
     "@kevinmarrec/nuxt-pwa": "^0.17.0",
     "@nuxtjs/google-fonts": "3.0.1",
-    "@so1ve/eslint-config": "^0.106.0",
+    "@so1ve/eslint-config": "^0.107.0",
     "@unocss/nuxt": "^0.53.1",
     "@unocss/reset": "^0.53.1",
     "eslint": "^8.42.0",
