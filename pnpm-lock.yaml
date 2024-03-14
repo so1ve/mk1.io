@@ -12,8 +12,8 @@ devDependencies:
     specifier: ^0.17.0
     version: 0.17.0
   '@nuxtjs/google-fonts':
-    specifier: 3.1.3
-    version: 3.1.3
+    specifier: 3.2.0
+    version: 3.2.0
   '@so1ve/eslint-config':
     specifier: ^0.110.0
     version: 0.110.0(eslint@8.57.0)(prettier@2.8.8)(svelte@4.2.12)(typescript@5.4.2)
@@ -1304,7 +1304,7 @@ packages:
     engines: {node: ^14.18.0 || >=16.10.0}
     dependencies:
       '@nuxt/schema': 3.5.3
-      c12: 1.8.0
+      c12: 1.9.0
       consola: 3.2.3
       defu: 6.1.4
       globby: 13.2.2
@@ -1312,38 +1312,11 @@ packages:
       ignore: 5.3.1
       jiti: 1.21.0
       knitwork: 1.0.0
-      mlly: 1.5.0
+      mlly: 1.6.0
       pathe: 1.1.2
       pkg-types: 1.0.3
       scule: 1.3.0
       semver: 7.6.0
-      unctx: 2.3.1
-      unimport: 3.7.1(rollup@4.9.1)
-      untyped: 1.4.2
-    transitivePeerDependencies:
-      - rollup
-      - supports-color
-    dev: true
-
-  /@nuxt/kit@3.8.2:
-    resolution: {integrity: sha512-LrXCm8hAkw+zpX8teUSD/LqXRarlXjbRiYxDkaqw739JSHFReWzBFgJbojsJqL4h1XIEScDGGOWiEgO4QO1sMg==}
-    engines: {node: ^14.18.0 || >=16.10.0}
-    dependencies:
-      '@nuxt/schema': 3.8.2
-      c12: 1.6.1
-      consola: 3.2.3
-      defu: 6.1.4
-      globby: 14.0.0
-      hash-sum: 2.0.0
-      ignore: 5.3.0
-      jiti: 1.21.0
-      knitwork: 1.0.0
-      mlly: 1.5.0
-      pathe: 1.1.2
-      pkg-types: 1.0.3
-      scule: 1.2.0
-      semver: 7.6.0
-      ufo: 1.3.2
       unctx: 2.3.1
       unimport: 3.7.1(rollup@4.9.1)
       untyped: 1.4.2
@@ -1381,26 +1354,6 @@ packages:
       pathe: 1.1.2
       pkg-types: 1.0.3
       postcss-import-resolver: 2.0.0
-      std-env: 3.7.0
-      ufo: 1.4.0
-      unimport: 3.7.1(rollup@4.9.1)
-      untyped: 1.4.2
-    transitivePeerDependencies:
-      - rollup
-      - supports-color
-    dev: true
-
-  /@nuxt/schema@3.8.2:
-    resolution: {integrity: sha512-AMpysQ/wHK2sOujLShqYdC4OSj/S3fFJGjhYXqA2g6dgmz+FNQWJRG/ie5sI9r2EX9Ela1wt0GN1jZR3wYNE8Q==}
-    engines: {node: ^14.18.0 || >=16.10.0}
-    dependencies:
-      '@nuxt/ui-templates': 1.3.1
-      consola: 3.2.3
-      defu: 6.1.4
-      hookable: 5.5.3
-      pathe: 1.1.2
-      pkg-types: 1.0.3
-      scule: 1.3.0
       std-env: 3.7.0
       ufo: 1.4.0
       unimport: 3.7.1(rollup@4.9.1)
@@ -1501,12 +1454,12 @@ packages:
       - vue-tsc
     dev: true
 
-  /@nuxtjs/google-fonts@3.1.3:
-    resolution: {integrity: sha512-gHwstHXQKd/r9O2WnQR4UJbi7Rfb9No1/gF4gqP+y18h1DAAZUOYPBF5EAPGjZKgDOW2XbZHP8Rw3oSDTpIT1A==}
+  /@nuxtjs/google-fonts@3.2.0:
+    resolution: {integrity: sha512-cGAjDJoeQ2jm6VJCo4AtSmKO6KjsbO9RSLj8q261fD0lMVNMZCxkCxBkg8L0/2Vfgp+5QBHWVXL71p1tiybJFw==}
     dependencies:
-      '@nuxt/kit': 3.8.2
-      google-fonts-helper: 3.4.1
-      pathe: 1.1.1
+      '@nuxt/kit': 3.10.3
+      google-fonts-helper: 3.5.0
+      pathe: 1.1.2
     transitivePeerDependencies:
       - rollup
       - supports-color
@@ -1970,11 +1923,6 @@ packages:
       tuf-js: 2.1.0
     transitivePeerDependencies:
       - supports-color
-    dev: true
-
-  /@sindresorhus/merge-streams@1.0.0:
-    resolution: {integrity: sha512-rUV5WyJrJLoloD4NDN1V1+LDMDWOa4OTsT4yYJwQNpTU6FWxkxHpL7eu4w+DmiH8x/EAM1otkPE1+LaspIbplw==}
-    engines: {node: '>=18'}
     dev: true
 
   /@sindresorhus/merge-streams@2.2.1:
@@ -3390,7 +3338,7 @@ packages:
   /builtins@5.0.1:
     resolution: {integrity: sha512-qwVpFEHNfhYJIzNRBvd2C1kyo6jz3ZSMPyyuR47OPdiKWlbYnZNyDWuyR175qDnAJLiCo5fBBqPb3RiXgWlkOQ==}
     dependencies:
-      semver: 7.5.4
+      semver: 7.6.0
     dev: true
 
   /bundle-name@3.0.0:
@@ -3398,40 +3346,6 @@ packages:
     engines: {node: '>=12'}
     dependencies:
       run-applescript: 5.0.0
-    dev: true
-
-  /c12@1.6.1:
-    resolution: {integrity: sha512-fAZOi3INDvIbmjuwAVVggusyRTxwNdTAnwLay8IsXwhFzDwPPGzFxzrx6L55CPFGPulUSZI0eyFUvRDXveoE3g==}
-    dependencies:
-      chokidar: 3.6.0
-      defu: 6.1.4
-      dotenv: 16.4.4
-      giget: 1.2.1
-      jiti: 1.21.0
-      mlly: 1.5.0
-      ohash: 1.1.3
-      pathe: 1.1.2
-      perfect-debounce: 1.0.0
-      pkg-types: 1.0.3
-      rc9: 2.1.1
-    dev: true
-
-  /c12@1.8.0:
-    resolution: {integrity: sha512-93U6RndoaAwFQPBcS9F/6lwtgBfrWh4695sQ/ChILkbj0C7zOZVptOU3Sxp0I/9xvfW/lzBWD90AXDQz4muSkA==}
-    dependencies:
-      chokidar: 3.6.0
-      defu: 6.1.4
-      dotenv: 16.4.4
-      giget: 1.2.1
-      jiti: 1.21.0
-      json5: 2.2.3
-      jsonc-parser: 3.2.1
-      mlly: 1.5.0
-      ohash: 1.1.3
-      pathe: 1.1.2
-      perfect-debounce: 1.0.0
-      pkg-types: 1.0.3
-      rc9: 2.1.1
     dev: true
 
   /c12@1.9.0:
@@ -5278,18 +5192,6 @@ packages:
       slash: 4.0.0
     dev: true
 
-  /globby@14.0.0:
-    resolution: {integrity: sha512-/1WM/LNHRAOH9lZta77uGbq0dAEQM+XjNesWwhlERDVenqothRbnzTrL3/LrIoEPPjeUHC3vrS6TwoyxeHs7MQ==}
-    engines: {node: '>=18'}
-    dependencies:
-      '@sindresorhus/merge-streams': 1.0.0
-      fast-glob: 3.3.2
-      ignore: 5.3.1
-      path-type: 5.0.0
-      slash: 5.1.0
-      unicorn-magic: 0.1.0
-    dev: true
-
   /globby@14.0.1:
     resolution: {integrity: sha512-jOMLD2Z7MAhyG8aJpNOpmziMOP4rPLcc95oQPKXBazW82z+CEgPFBQvEpRUa1KeIMUJo4Wsm+q6uzO/Q/4BksQ==}
     engines: {node: '>=18'}
@@ -5302,13 +5204,13 @@ packages:
       unicorn-magic: 0.1.0
     dev: true
 
-  /google-fonts-helper@3.4.1:
-    resolution: {integrity: sha512-unq9c1NF771916DrVR2MTpMJ5iHiMSjMBApErjhWT1FZIE+7x+Qik+w6cYi5jw/KtHELz+tyGAKgQetTU9wrlA==}
+  /google-fonts-helper@3.5.0:
+    resolution: {integrity: sha512-QcKvB3Y+jJFpvBUp/iG1oe9BbKirrjwU2mzJzKGGb5czz6T93CCP9A8IlfCoZnko7b1+gPH3yVghXP5EBvunDg==}
     dependencies:
       deepmerge: 4.3.1
       hookable: 5.5.3
       ofetch: 1.3.3
-      ufo: 1.3.2
+      ufo: 1.4.0
     dev: true
 
   /graceful-fs@4.2.11:
@@ -5524,11 +5426,6 @@ packages:
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
     dependencies:
       minimatch: 9.0.3
-    dev: true
-
-  /ignore@5.3.0:
-    resolution: {integrity: sha512-g7dmpshy+gD7mh88OC9NwSGTKoc3kyLAZQRU1mt53Aw/vnvfXnbC+F/7F7QoYVKbV+KNvJx8wArewKy1vXMtlg==}
-    engines: {node: '>= 4'}
     dev: true
 
   /ignore@5.3.1:
@@ -6547,15 +6444,6 @@ packages:
     hasBin: true
     dev: true
 
-  /mlly@1.5.0:
-    resolution: {integrity: sha512-NPVQvAY1xr1QoVeG0cy8yUYC7FQcOx6evl/RjT1wL5FvzPnzOysoqB/jmx/DhssT2dYa8nxECLAaFI/+gVLhDQ==}
-    dependencies:
-      acorn: 8.11.3
-      pathe: 1.1.2
-      pkg-types: 1.0.3
-      ufo: 1.4.0
-    dev: true
-
   /mlly@1.6.0:
     resolution: {integrity: sha512-YOvg9hfYQmnaB56Yb+KrJE2u0Yzz5zR+sLejEvF4fzwzV1Al6hkf2vyHTwqCRyv0hCi9rVCqVoXpyYevQIRwLQ==}
     dependencies:
@@ -7329,10 +7217,6 @@ packages:
   /path-type@5.0.0:
     resolution: {integrity: sha512-5HviZNaZcfqP95rwpv+1HDgUamezbqdSYTyzjTvwtJSnIH+3vnbmWsItli8OFEndS984VT55M3jduxZbX351gg==}
     engines: {node: '>=12'}
-    dev: true
-
-  /pathe@1.1.1:
-    resolution: {integrity: sha512-d+RQGp0MAYTIaDBIMmOfMwz3E+LOZnxx1HZd5R18mmCZY0QBlK0LDZfPc8FW8Ed2DlvsuE6PRjroDY+wg4+j/Q==}
     dev: true
 
   /pathe@1.1.2:
@@ -8242,10 +8126,6 @@ packages:
       regexp-ast-analysis: 0.6.0
     dev: true
 
-  /scule@1.2.0:
-    resolution: {integrity: sha512-CRCmi5zHQnSoeCik9565PONMg0kfkvYmcSqrbOJY4txFfy1wvVULV4FDaiXhUblUgahdqz3F2NwHZ8i4eBTwUw==}
-    dev: true
-
   /scule@1.3.0:
     resolution: {integrity: sha512-6FtHJEvt+pVMIB9IBY+IcCJ6Z5f1iQnytgyfKMhDKgmzYG+TeH/wx1y3l27rshSbLiSanrR9ffZDrEsmjlQF2g==}
     dev: true
@@ -8270,14 +8150,6 @@ packages:
 
   /semver@7.5.3:
     resolution: {integrity: sha512-QBlUtyVk/5EeHbi7X0fw6liDZc7BBmEaSYn01fMU1OUYbf6GPsbTtd8WmnqbI20SeycoHSeiybkE/q1Q+qlThQ==}
-    engines: {node: '>=10'}
-    hasBin: true
-    dependencies:
-      lru-cache: 6.0.0
-    dev: true
-
-  /semver@7.5.4:
-    resolution: {integrity: sha512-1bCSESV6Pv+i21Hvpxp3Dx+pSD8lIPt8uVjRrxAUt/nbswYc+tK6Y2btiULjd4+fnq15PX+nqQDC7Oft7WkwcA==}
     engines: {node: '>=10'}
     hasBin: true
     dependencies:
@@ -8953,10 +8825,6 @@ packages:
     hasBin: true
     dev: true
 
-  /ufo@1.3.2:
-    resolution: {integrity: sha512-o+ORpgGwaYQXgqGDwd+hkS4PuZ3QnmqMMxRuajK/a38L6fTpcE5GPIfrf+L/KemFzfUpeUQc1rRS1iDBozvnFA==}
-    dev: true
-
   /ufo@1.4.0:
     resolution: {integrity: sha512-Hhy+BhRBleFjpJ2vchUNN40qgkh0366FWJGqVLYBHev0vpHTrXSA0ryT+74UiW6KWsldNurQMKGqCm1M2zBciQ==}
     dev: true
@@ -9499,7 +9367,7 @@ packages:
       espree: 9.6.1
       esquery: 1.5.0
       lodash: 4.17.21
-      semver: 7.5.3
+      semver: 7.6.0
     transitivePeerDependencies:
       - supports-color
     dev: true
