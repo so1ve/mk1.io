@@ -18,7 +18,11 @@ serve((req) => {
     });
   }
   if (req.url.includes("/.well-known/matrix/server")) {
-    return new Response(JSON.stringify({ "m.server": "m.r4y.top:443" }));
+    return new Response(JSON.stringify({ "m.server": "m.r4y.top:443" }), {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
   }
   return serveDir(req, {
     fsRoot: "./.output/public",
