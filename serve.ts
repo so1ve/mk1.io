@@ -24,6 +24,20 @@ serve((req) => {
       },
     });
   }
+  if (req.url.includes("/.well-known/matrix/client")) {
+    return new Response(
+      JSON.stringify({
+        "m.homeserver": {
+          "base_url": "https://m.r4y.top"
+        }
+      }),
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  }
   return serveDir(req, {
     fsRoot: "./.output/public",
   });
