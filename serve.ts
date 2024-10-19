@@ -17,6 +17,27 @@ serve((req) => {
       },
     });
   }
+  if (req.url.includes("/.well-known/matrix/server")) {
+    return new Response(JSON.stringify({ "m.server": "matrix.mk1.io:443" }), {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  }
+  if (req.url.includes("/.well-known/matrix/client")) {
+    return new Response(
+      JSON.stringify({
+        "m.homeserver": {
+          "base_url": "https://matrix.mk1.io"
+        }
+      }),
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  }
   return serveDir(req, {
     fsRoot: "./.output/public",
   });
