@@ -21,7 +21,7 @@ jobs:
       - name: Set node
         uses: actions/setup-node@1a4442cacd436585916779262731d5b162bc6ec7 # v3
         with:
-          node-version: 16.x
+          node-version: 20.x
           cache: pnpm
 
       - name: Setup
@@ -44,7 +44,7 @@ jobs:
   #     - name: Set node
   #       uses: actions/setup-node@8c91899e586c5b171469028077307d293428b516 # v3
   #       with:
-  #         node-version: 16.x
+  #         node-version: 20.x
   #         cache: pnpm
 
   #     - name: Setup
@@ -67,7 +67,7 @@ jobs:
       - name: Set node
         uses: actions/setup-node@1a4442cacd436585916779262731d5b162bc6ec7 # v3
         with:
-          node-version: 16.x
+          node-version: 20.x
           cache: pnpm
 
       - name: Setup
