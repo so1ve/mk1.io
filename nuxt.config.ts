@@ -84,7 +84,7 @@ export default defineNuxtConfig({
 	routeRules: {
 		"/.well-known/webfinger": {
 			redirect: {
-				to: "https://mas.mk1.io/.well-known/webfinger",
+				to: "https://misskey.mk1.io/.well-known/webfinger",
 				statusCode: 301,
 			},
 			headers: {
