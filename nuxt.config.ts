@@ -1,6 +1,5 @@
 export default defineNuxtConfig({
-	srcDir: "./src",
-	modules: ["@unocss/nuxt", "@nuxtjs/google-fonts", "@kevinmarrec/nuxt-pwa"],
+	modules: ["@unocss/nuxt", "@nuxtjs/google-fonts"],
 	unocss: {
 		preflight: true,
 	},
@@ -9,21 +8,6 @@ export default defineNuxtConfig({
 			"Fira+Code": true,
 			"Inter": true,
 			"Fira+Mono": [400, 700],
-		},
-	},
-	pwa: {
-		icon: {
-			fileName: "favicon.png",
-		},
-		meta: {
-			name: "Ray's Homepage",
-			author: "Ray",
-			description: "Ray's Homepage",
-			theme_color: "#ffffff",
-		},
-		manifest: {
-			name: "Ray's Homepage",
-			lang: "en",
 		},
 	},
 	app: {
@@ -48,51 +32,48 @@ export default defineNuxtConfig({
 				{ name: "msapplication-TileColor", content: "#ffffff" },
 				{ name: "msapplication-TileImage", content: "/favicon.png" },
 				{ name: "application-name", content: "Ray" },
-				{ hid: "description", name: "description", content: "Ray's Homepage" },
-				{ hid: "og:title", property: "og:title", content: "Ray's Homepage" },
-				{ hid: "og:description", property: "og:description", content: "Ray" },
-				{ hid: "og:image", property: "og:image", content: "/favicon.png" },
-				{ hid: "og:url", property: "og:url", content: "https://mk1.io" },
-				{ hid: "og:site_name", property: "og:site_name", content: "Ray" },
-				{ hid: "og:type", property: "og:type", content: "website" },
-				{ hid: "og:locale", property: "og:locale", content: "en_US" },
-				{ hid: "twitter:card", name: "twitter:card", content: "summary" },
 				{
-					hid: "twitter:title",
+					id: "description",
+					name: "description",
+					content: "Ray's Homepage",
+				},
+				{ id: "og:title", property: "og:title", content: "Ray's Homepage" },
+				{ id: "og:description", property: "og:description", content: "Ray" },
+				{ id: "og:image", property: "og:image", content: "/favicon.png" },
+				{ id: "og:url", property: "og:url", content: "https://mk1.io" },
+				{ id: "og:site_name", property: "og:site_name", content: "Ray" },
+				{ id: "og:type", property: "og:type", content: "website" },
+				{ id: "og:locale", property: "og:locale", content: "en_US" },
+				{ id: "twitter:card", name: "twitter:card", content: "summary" },
+				{
+					id: "twitter:title",
 					name: "twitter:title",
 					content: "Ray's Homepage",
 				},
 				{
-					hid: "twitter:description",
+					id: "twitter:description",
 					name: "twitter:description",
 					content: "Ray's Homepage",
 				},
 				{
-					hid: "twitter:image",
+					id: "twitter:image",
 					name: "twitter:image",
 					content: "/favicon.png",
 				},
 				{
-					hid: "twitter:site",
+					id: "twitter:site",
 					name: "twitter:site",
 					content: "https://mk1.io",
 				},
-				{ hid: "twitter:creator", name: "twitter:creator", content: "@so1v3" },
+				{ id: "twitter:creator", name: "twitter:creator", content: "@so1v3" },
 			],
 		},
 	},
-	routeRules: {
-		"/.well-known/webfinger": {
-			redirect: {
-				to: "https://misskey.mk1.io/.well-known/webfinger",
-				statusCode: 301,
-			},
-			headers: {
-				"Access-Control-Allow-Origin": "*",
-			},
-		},
+	features: {
+		noScripts: true,
 	},
 	experimental: {
 		payloadExtraction: false,
 	},
+	compatibilityDate: "2025-10-13",
 });
