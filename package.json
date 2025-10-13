@@ -23,15 +23,10 @@
 		"typescript": "^5.9.3"
 	},
 	"pnpm": {
-		"peerDependencyRules": {
-			"ignoreMissing": [
-				"vite",
-				"webpack"
-			]
-		},
 		"onlyBuiltDependencies": [
 			"@parcel/watcher",
 			"esbuild",
+			"oxc-parser",
 			"unrs-resolver"
 		]
 	}
