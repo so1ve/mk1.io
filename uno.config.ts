@@ -1,11 +1,11 @@
 import {
 	defineConfig,
 	presetIcons,
-	presetUno,
+	presetWind3,
 	transformerDirectives,
 } from "unocss";
 
 export default defineConfig({
-	presets: [presetUno(), presetIcons()],
+	presets: [presetWind3(), presetIcons()],
 	transformers: [transformerDirectives()],
 });

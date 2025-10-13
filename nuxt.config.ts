@@ -69,6 +69,11 @@ export default defineNuxtConfig({
 			],
 		},
 	},
+	typescript: {
+		tsConfig: {
+			include: ["uno.config.ts"],
+		},
+	},
 	features: {
 		noScripts: true,
 	},
