@@ -71,7 +71,7 @@ export default defineNuxtConfig({
 	},
 	typescript: {
 		tsConfig: {
-			include: ["uno.config.ts"],
+			include: ["../uno.config.ts"],
 		},
 	},
 	features: {
