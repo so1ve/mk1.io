@@ -26,7 +26,6 @@
 		"onlyBuiltDependencies": [
 			"@parcel/watcher",
 			"esbuild",
-			"oxc-parser",
 			"unrs-resolver"
 		]
 	}
