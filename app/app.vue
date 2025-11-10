@@ -23,22 +23,17 @@ import "./main.css";
 			<Item icon="i-ri:github-line" link="https://github.com/so1ve">
 				GitHub
 			</Item>
-			<Item icon="i-ri:flask-line" link="https://blog.mk1.io/pages/projects">
+			<Item icon="i-ri:flask-line" link="https://blog.mk1.io/projects">
 				Projects
 			</Item>
 			<Item
 				icon="i-ri:money-cny-circle-line"
-				link="https://blog.mk1.io/pages/donate"
+				link="https://github.com/sponsors/so1ve"
 			>
 				Donate
 			</Item>
-			<Item icon="i-ri:link" link="https://blog.mk1.io/pages/friends">
-				Friends
-			</Item>
-			<Item
-				icon="i-ri:account-circle-fill"
-				link="https://blog.mk1.io/pages/about"
-			>
+			<Item icon="i-ri:link" link="https://blog.mk1.io/links">Friends</Item>
+			<Item icon="i-ri:account-circle-fill" link="https://blog.mk1.io/about">
 				About
 			</Item>
 		</section>
