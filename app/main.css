@@ -14,16 +14,15 @@
 	--heat-3: #dc6638;
 	--heat-4: #b8380f;
 	--radius: 10px;
-	--font-sans:
-		"Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", "PingFang SC",
-		"Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
-	--font-serif: "Newsreader", "Songti SC", "Noto Serif CJK SC", Georgia, serif;
+	--font-serif:
+		"Source Serif 4", "Noto Serif SC", "Noto Serif CJK SC",
+		"Source Han Serif SC", "Songti SC", "STSong", serif;
 	--font-monospace:
-		"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
-	font-family: var(--font-sans);
-	font-size: 15px;
-	line-height: 1.6;
-	font-feature-settings: "cv11", "ss01";
+		"IBM Plex Mono", ui-monospace, "Cascadia Mono", SFMono-Regular, Menlo,
+		Consolas, "Noto Sans Mono CJK SC", monospace;
+	font-family: var(--font-serif);
+	font-size: 16px;
+	line-height: 1.7;
 	-webkit-font-smoothing: antialiased;
 	text-rendering: optimizeLegibility;
 }
@@ -108,6 +107,84 @@ figcaption {
 	vertical-align: -0.125em;
 }
 
+/* Site header and footer */
+
+.site-head {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.75rem 1.5rem;
+	margin-bottom: clamp(2.5rem, 7vh, 4.5rem);
+}
+
+.site-name {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.625rem;
+	font-size: 1.125rem;
+	font-weight: 700;
+}
+
+.site-avatar {
+	border-radius: 50%;
+}
+
+.site-nav,
+.site-foot nav {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.25rem 1.25rem;
+}
+
+.site-nav a {
+	color: var(--muted);
+	font-size: 0.9375rem;
+	text-decoration: underline;
+	text-decoration-color: transparent;
+	text-decoration-thickness: 1.5px;
+	text-underline-offset: 0.35em;
+	transition:
+		color 0.15s,
+		text-decoration-color 0.15s;
+}
+
+.site-nav a:hover {
+	color: var(--text);
+}
+
+.site-nav a.router-link-exact-active {
+	color: var(--text);
+	text-decoration-color: var(--accent);
+}
+
+/* Page headings */
+
+.page-head {
+	margin-bottom: 0.5rem;
+}
+
+.page-head h1 {
+	font-size: 2.25rem;
+	line-height: 1.2;
+}
+
+.page-head .lede a,
+.lede a {
+	/* Templates wrap link text onto its own line; keep that space out of the underline. */
+	display: inline-block;
+	text-decoration: underline;
+	text-decoration-color: var(--muted);
+	text-decoration-thickness: 1px;
+	text-underline-offset: 0.2em;
+}
+
+.page-head .lede a:hover,
+.lede a:hover {
+	color: var(--accent);
+	text-decoration-color: var(--accent);
+}
+
 /* Hero */
 
 .hero {
@@ -115,7 +192,6 @@ figcaption {
 	grid-template-columns: auto minmax(0, 1fr);
 	gap: 1.25rem 1.75rem;
 	align-items: start;
-	margin-bottom: 3rem;
 }
 
 .avatar {
@@ -125,9 +201,8 @@ figcaption {
 }
 
 h1 {
-	font-family: var(--font-serif);
 	font-size: 2.75rem;
-	font-weight: 500;
+	font-weight: 700;
 	line-height: 1;
 	letter-spacing: -0.02em;
 }
@@ -142,17 +217,9 @@ h1 {
 }
 
 .lede {
-	max-width: 34rem;
 	margin-top: 0.875rem;
 	font-size: 1.0625rem;
 	line-height: 1.55;
-}
-
-.lede a {
-	text-decoration: underline;
-	text-decoration-color: var(--accent);
-	text-decoration-thickness: 1.5px;
-	text-underline-offset: 0.2em;
 }
 
 .facts {
@@ -169,39 +236,10 @@ h1 {
 	font-weight: 600;
 }
 
-.links {
-	display: flex;
-	flex-wrap: wrap;
-	grid-column: 2;
-	gap: 0.5rem;
-}
-
-.links a {
-	display: inline-flex;
-	gap: 0.375rem;
-	align-items: center;
-	padding: 0.3rem 0.75rem;
-	border: 1px solid var(--border);
-	border-radius: 999px;
-	color: var(--muted);
-	font-size: 0.875rem;
-	transition:
-		color 0.15s,
-		border-color 0.15s,
-		background-color 0.15s;
-}
-
-.links a:hover {
-	border-color: var(--text);
-	color: var(--text);
-	background: var(--raised);
-}
-
 /* Contribution calendar */
 
 .calendar {
 	position: relative;
-	margin-bottom: 4rem;
 	padding: 1.25rem 1.25rem 1rem;
 	border: 1px solid var(--border);
 	border-radius: var(--radius);
@@ -321,7 +359,7 @@ main {
 	display: grid;
 	/* Let wide children such as the calendar scroll instead of widening the page. */
 	grid-template-columns: minmax(0, 1fr);
-	gap: 4rem;
+	gap: 3.5rem;
 }
 
 .block-head {
@@ -335,9 +373,8 @@ main {
 }
 
 h2 {
-	font-family: var(--font-serif);
 	font-size: 1.5rem;
-	font-weight: 500;
+	font-weight: 700;
 	line-height: 1.2;
 	letter-spacing: -0.01em;
 }
@@ -382,9 +419,8 @@ h2 {
 }
 
 .featured-title {
-	font-family: var(--font-serif);
 	font-size: 1.75rem;
-	font-weight: 500;
+	font-weight: 700;
 	line-height: 1.3;
 	letter-spacing: -0.01em;
 	text-wrap: balance;
@@ -397,7 +433,6 @@ h2 {
 
 .featured-excerpt {
 	display: -webkit-box;
-	max-width: 40rem;
 	overflow: hidden;
 	color: var(--muted);
 	line-height: 1.75;
@@ -478,13 +513,13 @@ h2 {
 	font-weight: 400;
 }
 
-.out {
+.project-badge {
+	flex: none;
+	padding: 0 0.375rem;
+	border: 1px solid var(--border);
+	border-radius: 4px;
 	color: var(--muted);
-	transition: color 0.15s;
-}
-
-.project:hover .out {
-	color: var(--accent);
+	font-size: 0.75rem;
 }
 
 .project-description {
@@ -520,6 +555,7 @@ h2 {
 .block-note {
 	color: var(--muted);
 	font-size: 0.875rem;
+	text-align: right;
 }
 
 .spots {
@@ -687,54 +723,223 @@ a.feed-title:hover {
 
 /* Friends */
 
-.friends {
+.friend-chips {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 0.5rem;
+	gap: 0.75rem 1.5rem;
 }
 
-.friends a {
+.friend-chips a {
 	display: inline-flex;
 	gap: 0.5rem;
 	align-items: center;
-	padding: 0.25rem 0.875rem 0.25rem 0.25rem;
-	border: 1px solid var(--border);
-	border-radius: 999px;
-	font-size: 0.875rem;
-	transition:
-		border-color 0.15s,
-		background-color 0.15s;
+	font-size: 0.9375rem;
+	transition: color 0.15s;
 }
 
-.friends a:hover {
-	border-color: var(--faint);
-	background: var(--raised);
+.friend-chips a:hover,
+.friend-list a:hover .friend-name {
+	color: var(--accent);
 }
 
-.friend-initial {
-	display: grid;
-	place-items: center;
-	width: 28px;
-	height: 28px;
-	color: var(--muted);
-	font-size: 0.75rem;
-	font-weight: 600;
-}
-
-.friends img,
-.friend-initial {
+.friend-avatar {
+	flex: none;
 	border-radius: 50%;
 	background: var(--border);
 	object-fit: cover;
 }
 
+.friend-initial {
+	display: grid;
+	place-items: center;
+	color: var(--muted);
+	font-size: 0.75rem;
+	font-weight: 600;
+}
+
+.friend-list {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 0 2rem;
+}
+
+.friend-list a {
+	display: flex;
+	gap: 0.875rem;
+	align-items: flex-start;
+	padding-block: 0.875rem;
+	border-bottom: 1px dashed var(--border);
+}
+
+.friend-text {
+	display: grid;
+	min-width: 0;
+}
+
+.friend-name {
+	font-weight: 600;
+	transition: color 0.15s;
+}
+
+.friend-description {
+	color: var(--muted);
+	font-size: 0.875rem;
+	line-height: 1.5;
+}
+
+.friend-host {
+	margin-top: 0.125rem;
+	color: var(--muted);
+	font-family: var(--font-monospace);
+	font-size: 0.75rem;
+}
+
+/* Repository table */
+
+.repo-table > li {
+	display: grid;
+	grid-template-columns: minmax(0, 11rem) minmax(0, 1fr) 6.5rem 3.5rem 6rem;
+	gap: 1rem;
+	align-items: baseline;
+	padding-block: 0.5rem;
+	border-bottom: 1px dashed var(--border);
+}
+
+.repo-table > li:last-child {
+	border-bottom: 0;
+}
+
+.repo-name {
+	overflow: hidden;
+	font-weight: 600;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	transition: color 0.15s;
+}
+
+.repo-name:hover {
+	color: var(--accent);
+}
+
+.repo-description {
+	overflow: hidden;
+	color: var(--muted);
+	font-size: 0.875rem;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.repo-language,
+.repo-stars {
+	display: inline-flex;
+	gap: 0.375rem;
+	align-items: center;
+	color: var(--muted);
+	font-size: 0.8125rem;
+	white-space: nowrap;
+}
+
+.repo-date {
+	color: var(--muted);
+	font-size: 0.8125rem;
+	text-align: right;
+}
+
+/* Sorting without scripts: the radio buttons choose which rank orders the rows. */
+
+.sort {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	gap: 0.25rem 0.875rem;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	color: var(--muted);
+	font-size: 0.875rem;
+}
+
+.sort legend {
+	float: left;
+	padding: 0;
+	margin-right: 0.125rem;
+}
+
+.sort label {
+	display: inline-flex;
+	gap: 0.375rem;
+	align-items: baseline;
+	cursor: pointer;
+	transition: color 0.15s;
+}
+
+.sort label:hover,
+.sort label:has(:checked) {
+	color: var(--text);
+}
+
+.sort input {
+	margin: 0;
+	accent-color: var(--accent);
+}
+
+.sortable {
+	display: flex;
+	flex-direction: column;
+}
+
+.sortable > li {
+	order: var(--by-stars);
+}
+
+.block:has(#sort-updated:checked) .sortable > li {
+	order: var(--by-updated);
+}
+
+/* Rows move on screen, so divide them with the column gap instead of borders. */
+.sortable {
+	gap: 1px;
+	background: linear-gradient(var(--border), var(--border)) content-box;
+}
+
+.sortable > li,
+.sortable > li:last-child {
+	border: 0;
+	background: var(--background);
+}
+
+.archived summary {
+	display: flex;
+	align-items: baseline;
+	gap: 1rem;
+	padding-bottom: 0.625rem;
+	margin-bottom: 0.75rem;
+	border-bottom: 1px solid var(--border);
+	cursor: pointer;
+	list-style: none;
+}
+
+.archived summary::-webkit-details-marker {
+	display: none;
+}
+
+.archived summary h2::after {
+	content: " +";
+	color: var(--muted);
+	font-weight: 400;
+}
+
+.archived[open] summary h2::after {
+	content: " −";
+}
+
 /* Footer */
 
-footer {
+.site-foot {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
-	gap: 0.25rem 1rem;
+	gap: 0.5rem 1rem;
 	margin-top: 5rem;
 	padding-top: 1.25rem;
 	border-top: 1px solid var(--border);
@@ -742,11 +947,12 @@ footer {
 	font-size: 0.8125rem;
 }
 
-footer a {
+.site-foot a {
 	color: var(--muted);
+	transition: color 0.15s;
 }
 
-footer a:hover {
+.site-foot a:hover {
 	color: var(--accent);
 }
 
@@ -778,8 +984,28 @@ footer a:hover {
 		font-size: 2.25rem;
 	}
 
-	.links {
-		grid-column: auto;
+	.repo-table > li {
+		grid-template-columns: minmax(0, 1fr) auto;
+		gap: 0 1rem;
+	}
+
+	.repo-description {
+		grid-column: 1 / -1;
+		grid-row: 2;
+		white-space: normal;
+	}
+
+	.repo-language,
+	.repo-date {
+		display: none;
+	}
+
+	.friend-list {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.block-head:has(.block-note) {
+		flex-wrap: wrap;
 	}
 
 	.calendar {

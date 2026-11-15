@@ -38,10 +38,15 @@ export interface Activity {
 	moreCommits: number;
 }
 
+export interface Language {
+	name: string;
+	color: string | null;
+}
+
 export interface HotSpot {
 	repo: string;
 	url: string;
-	language: { name: string; color: string } | null;
+	language: Language | null;
 	commits: number;
 	pullRequests: number;
 	/** Commits per week, oldest first, covering the whole window. */
@@ -51,11 +56,21 @@ export interface HotSpot {
 export interface Project {
 	owner: string;
 	name: string;
-	forks: number;
 	description: string;
-	language: string | null;
+	language: Language | null;
 	stars: number;
+	forks: number;
 	url: string;
+	pushedAt: string;
+	archived: boolean;
+}
+
+export interface Repositories {
+	pinned: Project[];
+	/** Public repositories owned by the user, most recently pushed first. */
+	owned: Project[];
+	/** Other people's repositories the user committed to or opened PRs in. */
+	contributed: Project[];
 }
 
 export interface Profile {
@@ -74,6 +89,7 @@ export interface Friend {
 	name: string;
 	url: string;
 	avatar: string | null;
+	description: string | null;
 }
 
 const ENTITIES: Record<string, string> = {
@@ -148,13 +164,18 @@ export async function fetchFriends(): Promise<Friend[]> {
 	if (block === undefined) {
 		throw new Error(`${FRIENDS_SOURCE}: no friends block found`);
 	}
-	const friends: { name: string; url: string; avatar?: string }[] =
-		parseYaml(block);
+	const friends: {
+		name: string;
+		url: string;
+		avatar?: string;
+		description?: string;
+	}[] = parseYaml(block);
 
-	return friends.map(({ name, url, avatar }) => ({
+	return friends.map(({ name, url, avatar, description }) => ({
 		name,
 		url,
 		avatar: avatar ?? null,
+		description: description ?? null,
 	}));
 }
 
@@ -541,38 +562,82 @@ export async function fetchActivity(limit: number): Promise<Activity[]> {
 	return activity;
 }
 
-async function fetchPinnedRepos() {
-	const html = await fetchText(`https://github.com/${GITHUB_USER}`);
-	const repos = [
-		...html.matchAll(
-			// Owned repositories omit the owner prefix, so match up to the name span.
-			/href="\/([^"/]+\/[^"/]+)"[^>]*>(?:<span class="owner[^"]*">[^<]*<\/span>)?<span class="repo">/g,
-		),
-	].map(([, repo]) => repo!);
-	if (repos.length === 0) {
-		throw new Error(`github.com/${GITHUB_USER}: no pinned repositories found`);
-	}
+const REPOSITORY_FIELDS = `
+	name
+	owner { login }
+	description
+	url
+	stargazerCount
+	forkCount
+	pushedAt
+	isArchived
+	primaryLanguage { name color }
+`;
 
-	return repos;
-}
+const toProject = (repository: any): Project => ({
+	owner: repository.owner.login,
+	name: repository.name,
+	description: repository.description ?? "",
+	language: repository.primaryLanguage,
+	stars: repository.stargazerCount,
+	forks: repository.forkCount,
+	url: repository.url,
+	pushedAt: repository.pushedAt,
+	archived: repository.isArchived,
+});
+
+const PINNED_QUERY = `
+	query ($login: String!) {
+		user(login: $login) {
+			pinnedItems(first: 6, types: REPOSITORY) {
+				nodes { ... on Repository { ${REPOSITORY_FIELDS} } }
+			}
+		}
+	}
+`;
 
 // Mirrors the repositories pinned on the GitHub profile.
-export async function fetchProjects(): Promise<Project[]> {
-	const repos = await fetchPinnedRepos();
+export async function fetchPinnedProjects(): Promise<Project[]> {
+	const data = await githubGraphql(PINNED_QUERY, { login: GITHUB_USER });
 
-	return Promise.all(
-		repos.map(async (repo) => {
-			const data = await githubApi(`/repos/${repo}`);
+	return data.user.pinnedItems.nodes.map(toProject);
+}
 
-			return {
-				owner: data.owner.login,
-				name: data.name,
-				description: data.description ?? "",
-				language: data.language,
-				stars: data.stargazers_count,
-				forks: data.forks_count,
-				url: data.html_url,
-			};
-		}),
-	);
+const REPOSITORIES_QUERY = `
+	query ($login: String!) {
+		user(login: $login) {
+			pinnedItems(first: 6, types: REPOSITORY) {
+				nodes { ... on Repository { ${REPOSITORY_FIELDS} } }
+			}
+			repositories(
+				ownerAffiliations: OWNER
+				isFork: false
+				privacy: PUBLIC
+				first: 100
+				orderBy: { field: PUSHED_AT, direction: DESC }
+			) {
+				nodes { ${REPOSITORY_FIELDS} }
+			}
+			repositoriesContributedTo(
+				first: 30
+				includeUserRepositories: false
+				contributionTypes: [COMMIT, PULL_REQUEST]
+				orderBy: { field: STARGAZERS, direction: DESC }
+			) {
+				nodes { ${REPOSITORY_FIELDS} }
+			}
+		}
+	}
+`;
+
+export async function fetchRepositories(): Promise<Repositories> {
+	const { user } = await githubGraphql(REPOSITORIES_QUERY, {
+		login: GITHUB_USER,
+	});
+
+	return {
+		pinned: user.pinnedItems.nodes.map(toProject),
+		owned: user.repositories.nodes.map(toProject),
+		contributed: user.repositoriesContributedTo.nodes.map(toProject),
+	};
 }

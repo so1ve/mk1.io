@@ -4,24 +4,22 @@ const description =
 export default defineNuxtConfig({
 	modules: ["@nuxtjs/google-fonts"],
 	css: ["~/main.css"],
+	// The same fonts as the blog theme. Chinese text falls back to system fonts.
 	googleFonts: {
 		families: {
-			"Inter": [400, 500, 600],
-			"Newsreader": [500],
-			"JetBrains Mono": [400],
+			"Source Serif 4": { wght: "200..900", ital: "200..900" },
+			"IBM Plex Mono": { wght: [400], ital: [400] },
 		},
 		display: "swap",
 		download: true,
 		inject: true,
+		preload: true,
 	},
 	app: {
 		head: {
-			title: "Ray",
 			htmlAttrs: {
 				lang: "en",
 			},
-			// Every link on the page leaves the site.
-			base: { target: "_blank" },
 			link: [
 				{ rel: "me", href: "https://github.com/so1ve" },
 				{
@@ -65,7 +63,7 @@ export default defineNuxtConfig({
 		// request reaches a Function.
 		preset: "cloudflare-pages-static",
 		prerender: {
-			routes: ["/"],
+			routes: ["/", "/projects", "/activity", "/friends"],
 			failOnError: true,
 		},
 	},
