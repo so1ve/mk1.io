@@ -574,17 +574,21 @@ const REPOSITORY_FIELDS = `
 	primaryLanguage { name color }
 `;
 
-const toProject = (repository: any): Project => ({
-	owner: repository.owner.login,
-	name: repository.name,
-	description: repository.description ?? "",
-	language: repository.primaryLanguage,
-	stars: repository.stargazerCount,
-	forks: repository.forkCount,
-	url: repository.url,
-	pushedAt: repository.pushedAt,
-	archived: repository.isArchived,
-});
+const toProjects = (repositories: any[]): Project[] =>
+	repositories
+		// GitHub repository connections can contain null nodes.
+		.filter((repository) => repository !== null)
+		.map((repository) => ({
+			owner: repository.owner.login,
+			name: repository.name,
+			description: repository.description ?? "",
+			language: repository.primaryLanguage,
+			stars: repository.stargazerCount,
+			forks: repository.forkCount,
+			url: repository.url,
+			pushedAt: repository.pushedAt,
+			archived: repository.isArchived,
+		}));
 
 const PINNED_QUERY = `
 	query ($login: String!) {
@@ -600,7 +604,7 @@ const PINNED_QUERY = `
 export async function fetchPinnedProjects(): Promise<Project[]> {
 	const data = await githubGraphql(PINNED_QUERY, { login: GITHUB_USER });
 
-	return data.user.pinnedItems.nodes.map(toProject);
+	return toProjects(data.user.pinnedItems.nodes);
 }
 
 const REPOSITORIES_QUERY = `
@@ -636,8 +640,8 @@ export async function fetchRepositories(): Promise<Repositories> {
 	});
 
 	return {
-		pinned: user.pinnedItems.nodes.map(toProject),
-		owned: user.repositories.nodes.map(toProject),
-		contributed: user.repositoriesContributedTo.nodes.map(toProject),
+		pinned: toProjects(user.pinnedItems.nodes),
+		owned: toProjects(user.repositories.nodes),
+		contributed: toProjects(user.repositoriesContributedTo.nodes),
 	};
 }
