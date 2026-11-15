@@ -1,77 +1,57 @@
+const description =
+	"Ray (@so1ve): maintainer of Vue Language Tools. Writing, projects and recent activity.";
+
 export default defineNuxtConfig({
-	modules: ["@unocss/nuxt", "@nuxtjs/google-fonts"],
-	unocss: {
-		preflight: true,
-	},
+	modules: ["@nuxtjs/google-fonts"],
+	css: ["~/main.css"],
 	googleFonts: {
 		families: {
-			"Fira+Code": true,
-			"Inter": true,
-			"Fira+Mono": [400, 700],
+			"Inter": [400, 500, 600],
+			"Newsreader": [500],
+			"JetBrains Mono": [400],
 		},
+		display: "swap",
+		download: true,
+		inject: true,
 	},
 	app: {
 		head: {
 			title: "Ray",
-			link: [
-				{
-					rel: "icon",
-					href: "/favicon.png",
-				},
-			],
 			htmlAttrs: {
 				lang: "en",
 			},
+			// Every link on the page leaves the site.
+			base: { target: "_blank" },
+			link: [
+				{ rel: "me", href: "https://github.com/so1ve" },
+				{
+					rel: "alternate",
+					type: "application/rss+xml",
+					title: "Ray's Blog",
+					href: "https://blog.mk1.io/rss.xml",
+				},
+			],
 			meta: [
 				{ name: "viewport", content: "width=device-width, initial-scale=1" },
 				{ charset: "utf-8" },
-				{ name: "theme-color", content: "#ffffff" },
-				{ name: "apple-mobile-web-app-capable", content: "yes" },
-				{ name: "apple-mobile-web-app-status-bar-style", content: "black" },
-				{ name: "apple-mobile-web-app-title", content: "Ray's Homepage" },
-				{ name: "msapplication-TileColor", content: "#ffffff" },
-				{ name: "msapplication-TileImage", content: "/favicon.png" },
-				{ name: "application-name", content: "Ray" },
 				{
-					id: "description",
-					name: "description",
-					content: "Ray's Homepage",
-				},
-				{ id: "og:title", property: "og:title", content: "Ray's Homepage" },
-				{ id: "og:description", property: "og:description", content: "Ray" },
-				{ id: "og:image", property: "og:image", content: "/favicon.png" },
-				{ id: "og:url", property: "og:url", content: "https://mk1.io" },
-				{ id: "og:site_name", property: "og:site_name", content: "Ray" },
-				{ id: "og:type", property: "og:type", content: "website" },
-				{ id: "og:locale", property: "og:locale", content: "en_US" },
-				{ id: "twitter:card", name: "twitter:card", content: "summary" },
-				{
-					id: "twitter:title",
-					name: "twitter:title",
-					content: "Ray's Homepage",
+					name: "theme-color",
+					content: "#f6f4ee",
+					media: "(prefers-color-scheme: light)",
 				},
 				{
-					id: "twitter:description",
-					name: "twitter:description",
-					content: "Ray's Homepage",
+					name: "theme-color",
+					content: "#141413",
+					media: "(prefers-color-scheme: dark)",
 				},
-				{
-					id: "twitter:image",
-					name: "twitter:image",
-					content: "/favicon.png",
-				},
-				{
-					id: "twitter:site",
-					name: "twitter:site",
-					content: "https://mk1.io",
-				},
-				{ id: "twitter:creator", name: "twitter:creator", content: "@so1v3" },
+				{ name: "description", content: description },
+				{ property: "og:title", content: "Ray" },
+				{ property: "og:description", content: description },
+				{ property: "og:url", content: "https://mk1.io" },
+				{ property: "og:type", content: "website" },
+				{ name: "twitter:card", content: "summary" },
+				{ name: "twitter:creator", content: "@so1v3" },
 			],
-		},
-	},
-	typescript: {
-		tsConfig: {
-			include: ["../uno.config.ts"],
 		},
 	},
 	features: {
@@ -79,6 +59,23 @@ export default defineNuxtConfig({
 	},
 	experimental: {
 		payloadExtraction: false,
+	},
+	nitro: {
+		// Pages serves the prerendered output as plain static files, so no
+		// request reaches a Function.
+		preset: "cloudflare-pages-static",
+		prerender: {
+			routes: ["/"],
+			failOnError: true,
+		},
+	},
+	routeRules: {
+		"/.well-known/matrix/**": {
+			headers: {
+				"Content-Type": "application/json",
+				"Access-Control-Allow-Origin": "*",
+			},
+		},
 	},
 	compatibilityDate: "2025-10-13",
 });
