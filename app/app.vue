@@ -1,24 +1,28 @@
 <script setup lang="ts">
-import type { ActivityKind, ContributionDay } from "./feeds";
+import type { ActivityKind, ContributionDay, HotSpot } from "./feeds";
 import {
 	BLOG_URL,
 	GITHUB_USER,
 	fetchActivity,
 	fetchContributions,
 	fetchFriends,
+	fetchHotSpots,
 	fetchPosts,
 	fetchProfile,
 	fetchProjects,
 } from "./feeds";
 
+const HOT_SPOT_WEEKS = 12;
+
 // The page is prerendered without client scripts, so everything below is
 // fetched once at build time.
 const { data } = await useAsyncData("home", async () => {
-	const [posts, projects, activity, contributions, profile, friends] =
+	const [posts, projects, activity, hotSpots, contributions, profile, friends] =
 		await Promise.all([
 			fetchPosts(6),
 			fetchProjects(),
-			fetchActivity(9),
+			fetchActivity(8),
+			fetchHotSpots(HOT_SPOT_WEEKS, 6),
 			fetchContributions(),
 			fetchProfile(),
 			fetchFriends(),
@@ -28,14 +32,23 @@ const { data } = await useAsyncData("home", async () => {
 		posts,
 		projects,
 		activity,
+		hotSpots,
 		contributions,
 		profile,
 		friends,
 		builtAt: new Date().toISOString(),
 	};
 });
-const { posts, projects, activity, contributions, profile, friends, builtAt } =
-	data.value!;
+const {
+	posts,
+	projects,
+	activity,
+	hotSpots,
+	contributions,
+	profile,
+	friends,
+	builtAt,
+} = data.value!;
 const [featured, ...olderPosts] = posts;
 
 const avatar = (size: number) => `${profile.avatar}&s=${size}`;
@@ -113,6 +126,20 @@ const ACTIVITY_ICONS: Record<ActivityKind, string> = {
 	"fork": "git-fork-line",
 	"star": "star-line",
 };
+
+const busiestWeek = Math.max(1, ...hotSpots.flatMap((spot) => spot.weeks));
+const mostCommits = Math.max(1, ...hotSpots.map((spot) => spot.commits));
+// A short square-root scale keeps quiet weeks visible next to busy ones.
+const barHeight = (count: number) =>
+	count === 0 ? 0 : 12 + 88 * Math.sqrt(count / busiestWeek);
+const describeSpot = (spot: HotSpot) =>
+	[
+		`${spot.commits.toLocaleString("en")} ${spot.commits === 1 ? "commit" : "commits"}`,
+		spot.pullRequests > 0 &&
+			`${spot.pullRequests} ${spot.pullRequests === 1 ? "PR" : "PRs"}`,
+	]
+		.filter(Boolean)
+		.join(" · ");
 
 const LANGUAGE_COLORS: Record<string, string> = {
 	TypeScript: "#3178c6",
@@ -295,6 +322,41 @@ const links = [
 			</ul>
 		</section>
 
+		<section aria-labelledby="hot-spots" class="block">
+			<header class="block-head">
+				<h2 id="hot-spots">Where the work went</h2>
+				<span class="block-note">Last {{ HOT_SPOT_WEEKS }} weeks</span>
+			</header>
+			<ol class="spots">
+				<li v-for="spot in hotSpots" :key="spot.repo">
+					<a class="spot-name" :href="spot.url">
+						<span
+							class="swatch"
+							:style="{ background: spot.language?.color ?? 'var(--border)' }"
+						/>
+						<span class="owner">{{ spot.repo.split("/")[0] }}/</span>
+						<span>{{ spot.repo.split("/")[1] }}</span>
+					</a>
+					<span
+						class="spot-share"
+						:style="{ '--share': spot.commits / mostCommits }"
+					/>
+					<span class="spot-count">{{ describeSpot(spot) }}</span>
+					<span
+						aria-hidden="true"
+						class="spot-weeks"
+						title="Commits per week, oldest first"
+					>
+						<span
+							v-for="(count, week) in spot.weeks"
+							:key="week"
+							:style="{ height: `${barHeight(count)}%` }"
+						/>
+					</span>
+				</li>
+			</ol>
+		</section>
+
 		<section aria-labelledby="activity" class="block">
 			<header class="block-head">
 				<h2 id="activity">Recently on GitHub</h2>
@@ -303,44 +365,32 @@ const links = [
 					<Icon name="arrow-right-line" />
 				</a>
 			</header>
-			<ol class="timeline">
+			<ol class="feed">
 				<li
 					v-for="item in activity"
 					:key="item.url + item.date"
 					:data-kind="item.kind"
 				>
-					<Icon class="timeline-icon" :name="ACTIVITY_ICONS[item.kind]" />
-					<div class="timeline-body">
-						<p class="timeline-head">
-							<span class="timeline-text">
-								{{ item.action }}
-								<a :href="`https://github.com/${item.repo}`">{{ item.repo }}</a>
-								<a v-if="item.ref" class="timeline-ref" :href="item.url">
-									{{ item.ref }}
-								</a>
-							</span>
-							<time :datetime="item.date">
-								{{ formatDate(item.date, shortDate) }}
-							</time>
+					<Icon class="feed-icon" :name="ACTIVITY_ICONS[item.kind]" />
+					<div class="feed-body">
+						<a v-if="item.title" class="feed-title" :href="item.url">
+							{{ item.title }}
+						</a>
+						<p class="feed-meta">
+							<span>{{ item.action }}</span>
+							<a :href="`https://github.com/${item.repo}`">{{ item.repo }}</a>
+							<a v-if="item.ref" class="feed-ref" :href="item.url">
+								{{ item.ref }}
+							</a>
+							<a v-if="item.moreCommits > 0" :href="item.url">
+								+{{ item.moreCommits }}
+								{{ item.moreCommits === 1 ? "commit" : "commits" }}
+							</a>
 						</p>
-						<ul v-if="item.details.length > 0" class="timeline-details">
-							<li
-								v-for="detail in item.details"
-								:key="detail.url + detail.text"
-							>
-								<a :href="detail.url">
-									<code v-if="detail.sha">{{ detail.sha }}</code>
-									<span>{{ detail.text }}</span>
-								</a>
-							</li>
-							<li v-if="item.moreCommits > 0">
-								<a class="timeline-more" :href="item.url">
-									{{ item.moreCommits }} more
-									{{ item.moreCommits === 1 ? "commit" : "commits" }}
-								</a>
-							</li>
-						</ul>
 					</div>
+					<time :datetime="item.date">
+						{{ formatDate(item.date, shortDate) }}
+					</time>
 				</li>
 			</ol>
 		</section>

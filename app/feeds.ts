@@ -24,24 +24,28 @@ export type ActivityKind =
 	| "fork"
 	| "star";
 
-export interface ActivityDetail {
-	text: string;
-	url: string;
-	/** Short commit hash, shown before the message. */
-	sha?: string;
-}
-
 export interface Activity {
 	kind: ActivityKind;
 	action: string;
 	repo: string;
 	/** Branch, PR/issue number or tag shown after the repository. */
 	ref?: string;
+	/** Commit message, PR or issue title, or comment excerpt. */
+	title?: string;
 	url: string;
 	date: string;
-	details: ActivityDetail[];
-	/** Commits in a push beyond the ones listed in `details`. */
+	/** Commits in a push besides the one in `title`. */
 	moreCommits: number;
+}
+
+export interface HotSpot {
+	repo: string;
+	url: string;
+	language: { name: string; color: string } | null;
+	commits: number;
+	pullRequests: number;
+	/** Commits per week, oldest first, covering the whole window. */
+	weeks: number[];
 }
 
 export interface Project {
@@ -166,6 +170,113 @@ const githubApi = (path: string) =>
 		},
 	});
 
+async function githubGraphql(
+	query: string,
+	variables: Record<PropertyKey, unknown>,
+) {
+	const token = process.env.GITHUB_TOKEN;
+	if (!token) {
+		throw new Error("GITHUB_TOKEN is required to query the GitHub GraphQL API");
+	}
+	const response = await $fetch<{ data?: any; errors?: { message: string }[] }>(
+		"https://api.github.com/graphql",
+		{
+			method: "POST",
+			headers: { Authorization: `Bearer ${token}` },
+			body: { query, variables },
+		},
+	);
+	if (response.errors?.length) {
+		throw new Error(
+			`GitHub GraphQL: ${response.errors.map((error) => error.message).join("; ")}`,
+		);
+	}
+
+	return response.data;
+}
+
+const HOT_SPOTS_QUERY = `
+	query ($login: String!, $from: DateTime!, $to: DateTime!) {
+		user(login: $login) {
+			contributionsCollection(from: $from, to: $to) {
+				commitContributionsByRepository(maxRepositories: 25) {
+					repository { nameWithOwner url primaryLanguage { name color } }
+					contributions(first: 100) { nodes { occurredAt commitCount } }
+				}
+				pullRequestContributionsByRepository(maxRepositories: 25) {
+					repository { nameWithOwner url primaryLanguage { name color } }
+					contributions(first: 100) { nodes { occurredAt } }
+				}
+			}
+		}
+	}
+`;
+
+const DAY = 24 * 60 * 60 * 1000;
+
+// Repositories that received the most commits and pull requests over the last
+// `weeks` weeks, each with a per-week commit count.
+export async function fetchHotSpots(
+	weeks: number,
+	limit: number,
+): Promise<HotSpot[]> {
+	const to = new Date();
+	const from = new Date(to.getTime() - weeks * 7 * DAY);
+	const data = await githubGraphql(HOT_SPOTS_QUERY, {
+		login: GITHUB_USER,
+		from: from.toISOString(),
+		to: to.toISOString(),
+	});
+	const collection = data.user.contributionsCollection;
+	const weekOf = (date: string) =>
+		Math.min(
+			weeks - 1,
+			Math.floor((new Date(date).getTime() - from.getTime()) / (7 * DAY)),
+		);
+
+	const spots = new Map<string, HotSpot>();
+	function spotFor(repository: any) {
+		let spot = spots.get(repository.nameWithOwner);
+		if (!spot) {
+			spot = {
+				repo: repository.nameWithOwner,
+				url: repository.url,
+				language: repository.primaryLanguage,
+				commits: 0,
+				pullRequests: 0,
+				weeks: Array.from({ length: weeks }, () => 0),
+			};
+			spots.set(spot.repo, spot);
+		}
+
+		return spot;
+	}
+
+	for (const {
+		repository,
+		contributions,
+	} of collection.commitContributionsByRepository) {
+		const spot = spotFor(repository);
+		for (const { occurredAt, commitCount } of contributions.nodes) {
+			spot.commits += commitCount;
+			spot.weeks[weekOf(occurredAt)]! += commitCount;
+		}
+	}
+	for (const {
+		repository,
+		contributions,
+	} of collection.pullRequestContributionsByRepository) {
+		spotFor(repository).pullRequests += contributions.nodes.length;
+	}
+
+	// A pull request usually stands for more work than a single commit.
+	const weight = (spot: HotSpot) => spot.commits + spot.pullRequests * 5;
+
+	return [...spots.values()]
+		.sort((a, b) => weight(b) - weight(a))
+		.slice(0, limit);
+}
+
 export async function fetchProfile(): Promise<Profile> {
 	const user = await githubApi(`/users/${GITHUB_USER}`);
 
@@ -208,8 +319,6 @@ export async function fetchContributions(): Promise<ContributionDay[]> {
 	return days.sort((a, b) => a.date.localeCompare(b.date));
 }
 
-const MAX_COMMITS = 3;
-
 const firstLine = (text: string) => text.split("\n", 1)[0]!.trim();
 
 function excerpt(markdown: string, length = 120) {
@@ -233,7 +342,7 @@ async function describeEvent(
 	const repo: string = event.repo.name;
 	const repoUrl = `https://github.com/${repo}`;
 	const { payload } = event;
-	const base = { repo, details: [], moreCommits: 0 };
+	const base = { repo, moreCommits: 0 };
 
 	switch (event.type) {
 		case "PushEvent": {
@@ -246,28 +355,23 @@ async function describeEvent(
 						`/repos/${repo}/compare/${payload.before}...${payload.head}`,
 					);
 			const hasRange = compare !== undefined && compare.total_commits > 0;
-			const commits: any[] = hasRange
-				? // Compare lists commits oldest first; show the newest.
-					compare.commits.toReversed()
-				: [await githubApi(`/repos/${repo}/commits/${payload.head}`)];
+			// Compare lists commits oldest first.
+			const newest = hasRange
+				? compare.commits.at(-1)
+				: await githubApi(`/repos/${repo}/commits/${payload.head}`);
 			const total: number = hasRange ? compare.total_commits : 1;
-			const shown = commits.slice(0, MAX_COMMITS);
 
 			return {
 				...base,
 				kind: "push",
 				action: "Pushed to",
 				ref: branch,
+				title: firstLine(newest.commit.message),
 				url:
 					total === 1
-						? commits[0].html_url
+						? newest.html_url
 						: `${repoUrl}/compare/${payload.before.slice(0, 12)}...${payload.head.slice(0, 12)}`,
-				details: shown.map((commit) => ({
-					text: firstLine(commit.commit.message),
-					url: commit.html_url,
-					sha: commit.sha.slice(0, 7),
-				})),
-				moreCommits: total - shown.length,
+				moreCommits: total - 1,
 			};
 		}
 		case "PullRequestEvent": {
@@ -293,8 +397,8 @@ async function describeEvent(
 						: "pr-open",
 				action: `${action} pull request in`,
 				ref: `#${payload.number}`,
+				title: pull.title,
 				url: pull.html_url,
-				details: [{ text: pull.title, url: pull.html_url }],
 			};
 		}
 		case "PullRequestReviewEvent": {
@@ -307,8 +411,8 @@ async function describeEvent(
 				kind: "review",
 				action: "Reviewed pull request in",
 				ref: `#${pull.number}`,
+				title: pull.title,
 				url: payload.review?.html_url ?? pull.html_url,
-				details: [{ text: pull.title, url: pull.html_url }],
 			};
 		}
 		case "IssuesEvent": {
@@ -326,8 +430,8 @@ async function describeEvent(
 				kind: "issue",
 				action: `${action} issue in`,
 				ref: `#${payload.issue.number}`,
+				title: payload.issue.title,
 				url: payload.issue.html_url,
-				details: [{ text: payload.issue.title, url: payload.issue.html_url }],
 			};
 		}
 		case "IssueCommentEvent": {
@@ -341,13 +445,8 @@ async function describeEvent(
 				kind: "comment",
 				action: `Commented on ${kind} in`,
 				ref: `#${payload.issue.number}`,
+				title: excerpt(comment.body) || payload.issue.title,
 				url: comment.html_url,
-				details: [
-					{ text: payload.issue.title, url: payload.issue.html_url },
-					...(excerpt(comment.body)
-						? [{ text: excerpt(comment.body), url: comment.html_url }]
-						: []),
-				],
 			};
 		}
 		case "ReleaseEvent": {
@@ -360,10 +459,8 @@ async function describeEvent(
 				kind: "release",
 				action: "Released",
 				ref: release.tag_name,
+				title: release.name ?? undefined,
 				url: release.html_url,
-				details: release.name
-					? [{ text: release.name, url: release.html_url }]
-					: [],
 			};
 		}
 		case "CreateEvent": {
@@ -372,10 +469,8 @@ async function describeEvent(
 						...base,
 						kind: "create",
 						action: "Created repository",
+						title: payload.description ?? undefined,
 						url: repoUrl,
-						details: payload.description
-							? [{ text: payload.description, url: repoUrl }]
-							: [],
 					}
 				: undefined;
 		}
@@ -385,12 +480,6 @@ async function describeEvent(
 				kind: "fork",
 				action: "Forked",
 				url: payload.forkee.html_url,
-				details: [
-					{
-						text: `to ${payload.forkee.full_name}`,
-						url: payload.forkee.html_url,
-					},
-				],
 			};
 		}
 		case "WatchEvent": {
