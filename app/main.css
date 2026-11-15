@@ -661,7 +661,18 @@ h2 {
 	background: var(--raised);
 }
 
-.friends img {
+.friend-initial {
+	display: grid;
+	place-items: center;
+	width: 28px;
+	height: 28px;
+	color: var(--muted);
+	font-size: 0.75rem;
+	font-weight: 600;
+}
+
+.friends img,
+.friend-initial {
 	border-radius: 50%;
 	background: var(--line);
 	object-fit: cover;

@@ -32,6 +32,9 @@ jobs:
 
       - name: Build
         run: nr build
+        env:
+          # Raises the GitHub API rate limit for the build-time data fetches.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Lint and fix
         run: nr lint:fix

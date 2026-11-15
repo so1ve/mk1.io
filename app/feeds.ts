@@ -1,3 +1,5 @@
+import { parse as parseYaml } from "yaml";
+
 export const BLOG_URL = "https://blog.mk1.io";
 export const GITHUB_USER = "so1ve";
 
@@ -67,7 +69,7 @@ export interface ContributionDay {
 export interface Friend {
 	name: string;
 	url: string;
-	avatar: string;
+	avatar: string | null;
 }
 
 const ENTITIES: Record<string, string> = {
@@ -131,17 +133,24 @@ export async function fetchPosts(limit: number): Promise<Post[]> {
 		});
 }
 
-export async function fetchFriends(): Promise<Friend[]> {
-	const html = await fetchText(`${BLOG_URL}/links.html`);
+// blog.mk1.io blocks requests from CI runners, so read the page source from
+// the blog repository instead of the rendered HTML.
+const FRIENDS_SOURCE =
+	"https://raw.githubusercontent.com/so1ve/blog.mk1.io/main/pages/03-links.md";
 
-	return [
-		...html.matchAll(
-			/<a class="friend-link" href="([^"]+)">[\s\S]*?<img src="([^"]+)"[\s\S]*?class="friend-link-name">([^<]+)</g,
-		),
-	].map(([, url, avatar, name]) => ({
-		url: decodeEntities(url!),
-		avatar: decodeEntities(avatar!),
-		name: decodeEntities(name!),
+export async function fetchFriends(): Promise<Friend[]> {
+	const markdown = await fetchText(FRIENDS_SOURCE);
+	const block = markdown.match(/```friends\n([\s\S]*?)\n```/)?.[1];
+	if (block === undefined) {
+		throw new Error(`${FRIENDS_SOURCE}: no friends block found`);
+	}
+	const friends: { name: string; url: string; avatar?: string }[] =
+		parseYaml(block);
+
+	return friends.map(({ name, url, avatar }) => ({
+		name,
+		url,
+		avatar: avatar ?? null,
 	}));
 }
 

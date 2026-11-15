@@ -357,6 +357,7 @@ const links = [
 				<li v-for="friend in friends" :key="friend.url">
 					<a :href="friend.url">
 						<img
+							v-if="friend.avatar"
 							alt=""
 							decoding="async"
 							height="28"
@@ -364,6 +365,9 @@ const links = [
 							:src="friend.avatar"
 							width="28"
 						/>
+						<span v-else aria-hidden="true" class="friend-initial">
+							{{ [...friend.name][0] }}
+						</span>
 						<span>{{ friend.name }}</span>
 					</a>
 				</li>
