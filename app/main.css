@@ -251,8 +251,9 @@ h1 {
 /* Contribution calendar */
 
 .calendar {
+	--calendar-inline-padding: 1.25rem;
 	position: relative;
-	padding: 1.25rem 1.25rem 1rem;
+	padding: 1.25rem var(--calendar-inline-padding) 1rem;
 	border: 1px solid var(--border);
 	border-radius: var(--radius);
 	background: var(--raised);
@@ -315,12 +316,11 @@ h1 {
 .calendar-tip {
 	position: absolute;
 	bottom: 1rem;
-	left: 1.25rem;
+	inset-inline: var(--calendar-inline-padding);
 	display: none;
 	color: var(--muted);
 	font-size: 0.8125rem;
-	line-height: 1.6;
-	white-space: nowrap;
+	overflow-wrap: anywhere;
 	pointer-events: none;
 }
 
@@ -342,9 +342,10 @@ h1 {
 	visibility: hidden;
 }
 
-figcaption {
+.calendar figcaption {
 	display: flex;
-	flex-wrap: wrap;
+	/* Keep the summary at the bottom when the legend needs its own line. */
+	flex-wrap: wrap-reverse;
 	justify-content: space-between;
 	gap: 0.5rem 1rem;
 	margin-top: 1rem;
@@ -1013,11 +1014,7 @@ a.feed-title:hover {
 	}
 
 	.calendar {
-		padding-inline: 1rem;
-	}
-
-	.calendar-tip {
-		left: 1rem;
+		--calendar-inline-padding: 1rem;
 	}
 
 	.projects {
