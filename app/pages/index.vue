@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { BLOG_URL, GITHUB_USER } from "../feeds";
-import { formatCompact, formatDate } from "../format";
+import { formatDate } from "../format";
 import { HOT_SPOT_WEEKS, useSiteData } from "../site-data";
 
 const {
@@ -13,10 +13,21 @@ const {
 	friends,
 } = await useSiteData();
 const [featured, ...olderPosts] = posts;
-const totalContributions = contributions.reduce(
-	(sum, day) => sum + day.count,
-	0,
-);
+
+const elsewhere = [
+	{
+		label: "GitHub",
+		icon: "github-line",
+		url: `https://github.com/${GITHUB_USER}`,
+	},
+	{ label: "X", icon: "twitter-x-line", url: "https://x.com/so1v3" },
+	{ label: "RSS", icon: "rss-line", url: `${BLOG_URL}/rss.xml` },
+	{
+		label: "Sponsor",
+		icon: "heart-3-line",
+		url: `https://github.com/sponsors/${GITHUB_USER}`,
+	},
+];
 </script>
 
 <template>
@@ -24,33 +35,24 @@ const totalContributions = contributions.reduce(
 		<header class="hero">
 			<img
 				alt=""
-				class="avatar"
-				height="88"
-				:src="`${profile.avatar}&s=176`"
-				width="88"
+				class="hero-avatar"
+				height="120"
+				:src="`${profile.avatar}&s=240`"
+				width="120"
 			/>
 			<div>
-				<h1>
-					Ray
-					<span class="handle">@{{ GITHUB_USER }}</span>
-				</h1>
-				<p class="lede">
+				<h1>Ray</h1>
+				<p class="hero-bio">
 					I maintain open source projects. Studying in Beijing.
 				</p>
-				<p class="facts">
-					<span>
-						<b>{{ formatCompact(profile.followers) }}</b>
-						followers
-					</span>
-					<span>
-						<b>{{ profile.repos }}</b>
-						public repos
-					</span>
-					<span>
-						<b>{{ formatCompact(totalContributions) }}</b>
-						contributions this year
-					</span>
-				</p>
+				<ul aria-label="Elsewhere" class="elsewhere">
+					<li v-for="link in elsewhere" :key="link.label">
+						<a :href="link.url" target="_blank">
+							<Icon :name="link.icon" />
+							{{ link.label }}
+						</a>
+					</li>
+				</ul>
 			</div>
 		</header>
 

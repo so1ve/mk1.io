@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { BLOG_URL, GITHUB_USER } from "./feeds";
+import { BLOG_URL } from "./feeds";
 import { useSiteData } from "./site-data";
 
 const { profile, builtAt } = await useSiteData();
@@ -16,13 +16,6 @@ const pages = [
 	{ label: "Projects", to: "/projects" },
 	{ label: "Activity", to: "/activity" },
 	{ label: "Friends", to: "/friends" },
-];
-
-const elsewhere = [
-	{ label: "GitHub", url: `https://github.com/${GITHUB_USER}` },
-	{ label: "X", url: "https://x.com/so1v3" },
-	{ label: "RSS", url: `${BLOG_URL}/rss.xml` },
-	{ label: "Sponsor", url: `https://github.com/sponsors/${GITHUB_USER}` },
 ];
 </script>
 
@@ -49,18 +42,9 @@ const elsewhere = [
 	<NuxtPage />
 
 	<footer class="site-foot">
-		<nav aria-label="Elsewhere">
-			<a
-				v-for="link in elsewhere"
-				:key="link.label"
-				:href="link.url"
-				target="_blank"
-			>
-				{{ link.label }}
-			</a>
-		</nav>
+		<span>© 2020–{{ builtAt.slice(0, 4) }} Ray</span>
 		<span>
-			© 2020–{{ builtAt.slice(0, 4) }} Ray · built
+			Built
 			<time :datetime="builtAt">{{ builtAt.slice(0, 10) }}</time>
 		</span>
 	</footer>
