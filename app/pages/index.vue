@@ -20,7 +20,7 @@ const elsewhere = [
 		icon: "github-line",
 		url: `https://github.com/${GITHUB_USER}`,
 	},
-	{ label: "X", icon: "twitter-x-line", url: "https://x.com/so1v3" },
+	{ label: "X", url: "https://x.com/so1v3" },
 	{ label: "RSS", icon: "rss-line", url: `${BLOG_URL}/rss.xml` },
 	{
 		label: "Sponsor",
@@ -40,20 +40,20 @@ const elsewhere = [
 				:src="`${profile.avatar}&s=240`"
 				width="120"
 			/>
-			<div>
+			<div class="hero-copy">
 				<h1>Ray</h1>
 				<p class="hero-bio">
 					I maintain open source projects. Studying in Beijing.
 				</p>
-				<ul aria-label="Elsewhere" class="elsewhere">
-					<li v-for="link in elsewhere" :key="link.label">
-						<a :href="link.url" target="_blank">
-							<Icon :name="link.icon" />
-							{{ link.label }}
-						</a>
-					</li>
-				</ul>
 			</div>
+			<ul aria-label="Elsewhere" class="elsewhere">
+				<li v-for="link in elsewhere" :key="link.label">
+					<a :href="link.url" target="_blank">
+						<Icon v-if="link.icon" :name="link.icon" />
+						{{ link.label }}
+					</a>
+				</li>
+			</ul>
 		</header>
 
 		<ContributionCalendar :days="contributions" />

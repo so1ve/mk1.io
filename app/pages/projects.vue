@@ -53,10 +53,13 @@ useHead({ title: "Projects" });
 		</section>
 
 		<section aria-labelledby="mine" class="block">
-			<header class="block-head">
-				<h2 id="mine">My repositories</h2>
-				<fieldset class="sort">
-					<legend>Sort {{ active.length }} repositories by</legend>
+			<header class="block-head repo-head">
+				<div class="repo-heading">
+					<h2 id="mine">My repositories</h2>
+					<span class="block-note">{{ active.length }}</span>
+				</div>
+				<fieldset class="repo-sort">
+					<legend>Sort by</legend>
 					<label>
 						<input id="sort-stars" checked name="repo-sort" type="radio" />
 						Stars

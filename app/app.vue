@@ -12,7 +12,6 @@ useHead({
 });
 
 const pages = [
-	{ label: "Home", to: "/" },
 	{ label: "Projects", to: "/projects" },
 	{ label: "Activity", to: "/activity" },
 	{ label: "Friends", to: "/friends" },
@@ -21,7 +20,7 @@ const pages = [
 
 <template>
 	<header class="site-head">
-		<NuxtLink class="site-name" to="/">
+		<NuxtLink aria-label="Ray, home" class="site-name" to="/">
 			<img
 				alt=""
 				class="site-avatar"
@@ -29,7 +28,7 @@ const pages = [
 				:src="avatar(56)"
 				width="28"
 			/>
-			Ray
+			<span>Ray</span>
 		</NuxtLink>
 		<nav aria-label="Pages" class="site-nav">
 			<NuxtLink v-for="page in pages" :key="page.to" :to="page.to">
