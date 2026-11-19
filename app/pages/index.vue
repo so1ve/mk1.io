@@ -20,7 +20,7 @@ const elsewhere = [
 		icon: "github-line",
 		url: `https://github.com/${GITHUB_USER}`,
 	},
-	{ label: "X", url: "https://x.com/so1v3" },
+	{ label: "𝕏", url: "https://x.com/so1v3" },
 	{ label: "RSS", icon: "rss-line", url: `${BLOG_URL}/rss.xml` },
 	{
 		label: "Sponsor",
@@ -32,31 +32,33 @@ const elsewhere = [
 
 <template>
 	<main>
-		<header class="hero">
-			<img
-				alt=""
-				class="hero-avatar"
-				height="120"
-				:src="`${profile.avatar}&s=240`"
-				width="120"
-			/>
-			<div class="hero-copy">
-				<h1>Ray</h1>
-				<p class="hero-bio">
-					I maintain open source projects. Studying in Beijing.
-				</p>
-			</div>
-			<ul aria-label="Elsewhere" class="elsewhere">
-				<li v-for="link in elsewhere" :key="link.label">
-					<a :href="link.url" target="_blank">
-						<Icon v-if="link.icon" :name="link.icon" />
-						{{ link.label }}
-					</a>
-				</li>
-			</ul>
-		</header>
+		<div class="home-intro">
+			<header class="hero">
+				<img
+					alt=""
+					class="hero-avatar"
+					height="120"
+					:src="`${profile.avatar}&s=240`"
+					width="120"
+				/>
+				<div class="hero-copy">
+					<h1>Ray</h1>
+					<p class="hero-bio">
+						I maintain open source projects. Studying in Beijing.
+					</p>
+				</div>
+				<ul aria-label="Elsewhere" class="elsewhere">
+					<li v-for="link in elsewhere" :key="link.label">
+						<a :href="link.url" target="_blank">
+							<Icon v-if="link.icon" :name="link.icon" />
+							{{ link.label }}
+						</a>
+					</li>
+				</ul>
+			</header>
 
-		<ContributionCalendar :days="contributions" />
+			<ContributionCalendar :days="contributions" />
+		</div>
 
 		<section aria-labelledby="writing" class="block">
 			<header class="block-head">
